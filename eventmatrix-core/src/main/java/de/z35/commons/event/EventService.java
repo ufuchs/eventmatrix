@@ -12,11 +12,17 @@ import java.util.Calendar;
 import java.util.Iterator;
 import java.util.Vector;
 
-public abstract class EventService {
+public class EventService {
 
-	private int state;
+	// /////////////////////////////////////////////////////////////////////////
+	// fields
+	// /////////////////////////////////////////////////////////////////////////
 
 	protected Vector<Event> events;
+
+	// /////////////////////////////////////////////////////////////////////////
+	// ctor
+	// /////////////////////////////////////////////////////////////////////////
 
 	/**
 	 *
@@ -30,42 +36,9 @@ public abstract class EventService {
 		this.events = events;
 	}
 
-	/**
-	 *
-	 */
-	public void setState(int state, boolean enable) {
-
-		if (enable) {
-			this.state = this.state | state;
-		} else {
-			this.state = this.state & ~state;
-		}
-
-	}
-
-	/**
-	 *
-	 */
-	public boolean getState(int state) {
-		return (this.state & state) == state;
-	}
-
-	/**
-	 *
-	 * @param at
-	 * @param until
-	 */
-	protected void check(final Calendar at, final Calendar until) {
-
-		assert at != null : "date 'at' can't be null";
-
-		if (until == null) {
-			return;
-		}
-		
-		assert until.compareTo(at) <= 0: "date 'until' is lesser than date 'until'";
-
-	}
+	// /////////////////////////////////////////////////////////////////////////
+	// properties
+	// /////////////////////////////////////////////////////////////////////////
 
 	/**
 	 *
@@ -76,28 +49,55 @@ public abstract class EventService {
 	}
 
 	/**
-	 * Gets a vector of inheritors of EventAbstract, which matches the params
 	 *
-	 * @param classifier Represents a kind of identifier for the content.
-	 * @param from Date starting from.
-	 * @param to Date until to.
-	 * @return Inheritors of EventAbstract, which matches the criterias
-	 *         <code>classifier</code>, <code>from</code> and <code>to</code>
+	 * @param criteria
+	 * @return
 	 */
-	public abstract Vector<Event> getEvents(
-			final Integer classifier, final Calendar at, Calendar until);
+	public Vector<Event> getEvents(final Criteria criteria) {
+
+		Vector<Event> result = new Vector<Event>();
+
+		for (Event e : this.events) {
+
+			if (criteria.match(e)) {
+				result.add(e);
+			}
+
+		}
+
+		return result;
+
+	}
 
 	/**
-	 * Contract: </br>Drop all <code>EventAbstract</code> in the vector, which
-	 * field <code>date</code> don't be located inside of <code>at</code> and
-	 * <code>until</code>
 	 *
-	 * @param crossOuts
-	 * @param from
-	 * @param to
+	 * @param events
 	 */
-	public abstract Vector<Event> getEvents(final Calendar at,
-			final Calendar until);
+	public void setEvents(Vector<Event> events) {
+		this.events = events;
+	}
+
+
+	/**
+	 *
+	 * @param events
+	 * @param criteria
+	 */
+	public void trimEvents(Vector<Event> events, final Criteria criteria) {
+
+		Iterator<Event> it = events.iterator();
+
+		while (it.hasNext()) {
+
+			Event e = it.next();
+
+			if (criteria.match(e)) {
+				it.remove();
+			}
+
+		}
+
+	}
 
     /**
      *
@@ -113,40 +113,5 @@ public abstract class EventService {
         return (dayOfWeek == Calendar.SATURDAY) || (dayOfWeek == Calendar.SUNDAY);
 
     }
-
-    /**
-     * 
-     * @param eventMatrix
-     * @param at
-     * @param until
-     */
-	public void trimEvents(Vector<Event> eventMatrix, final Calendar at, final Calendar until) {
-
-		check(at, until);
-		
-		// remove all days until 'to' date
-		Iterator<? extends Event> it = eventMatrix.iterator();
-		
-		while (it.hasNext()) {
-
-			Event event = it.next();
-
-			if (event.getDateAt().before(at)) {
-				it.remove();
-			}
-		}
-
-		// remove all days starting by 'from' date until end of vector
-		it = eventMatrix.iterator();
-		while (it.hasNext()) {
-
-			Event event = it.next();
-
-			if (event.getDateAt().after(until)) {
-				it.remove();
-			}
-		}
-
-	}
 
 }
