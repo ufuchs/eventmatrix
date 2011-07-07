@@ -34,7 +34,7 @@ public class Utils {
 
 		// Protection
 		assert date != null : "'date' can't be null";
-		assert date.length() == 0 : "'date' can't be empty";
+		assert date.length() != 0 : "'date' can't be empty";
 		
 		Calendar cal = Calendar.getInstance(); 
 

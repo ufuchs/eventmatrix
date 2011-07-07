@@ -6,7 +6,6 @@
 
 package de.z35.commons.test.white.event.impl;
 
-import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Vector;
 
@@ -83,11 +82,12 @@ public class ProviderEasterDate {
 
 	}
 
+	// save Easter date concerning performance issues. (sorry, no better idea. Yet.)
 	int yy;
 	int mm;
 	int dd;
 
-	Calendar easterDate;
+	Calendar easter;
 	
 	Vector<Event> easterCycle = new Vector<Event>();
 
@@ -97,10 +97,9 @@ public class ProviderEasterDate {
 	 * @return
 	 * @throws Exception
 	 */
-	public Vector<Event> getEvents(final Calendar year) {
+	public Vector<Event> getEasterCycleAsEvents(final Calendar year) {
 
-		// 
-		this.getEasterDate(year.get(Calendar.YEAR));
+		this.getEaster(year.get(Calendar.YEAR));
 
 		this.getEasterCycleDays();
 
@@ -112,40 +111,26 @@ public class ProviderEasterDate {
 	 *
 	 */
 	private void getEasterCycleDays() {
-		// Osterdatum sichern
-		this.yy = easterDate.get(Calendar.YEAR);
-		this.mm = easterDate.get(Calendar.MONTH);
-		this.dd = easterDate.get(Calendar.DAY_OF_MONTH);
+		
+		// save easter date
+		this.yy = easter.get(Calendar.YEAR);
+		this.mm = easter.get(Calendar.MONTH);
+		this.dd = easter.get(Calendar.DAY_OF_MONTH);
 
-		// KarFreitag
-		this.easterCycle.add(this.rollAndGetEvent(Eastercycle.GOD_FRIDAY));
-
-		// Ostersontag
-		this.easterCycle.add(this.rollAndGetEvent(Eastercycle.EASTER_SUNDAY));
-
-		// Ostermontag
-		this.easterCycle.add(this.rollAndGetEvent(Eastercycle.EASTER_MONDAY));
-
-		// Himmelfahrt
-		this.easterCycle.add(this.rollAndGetEvent(Eastercycle.ASCENSION_DAY));
-
-		// Pfingstsonntag
-		this.easterCycle.add(this.rollAndGetEvent(Eastercycle.WHIT_SUNDAY));
-
-		// Pfingstmontag
-		this.easterCycle.add(this.rollAndGetEvent(Eastercycle.WHIT_MONDAY));
-
-		// Fronleichnam
-		this.easterCycle.add(this.rollAndGetEvent(Eastercycle.CORPUS_CHRISTI));
+		for (Eastercycle cycle : Eastercycle.values()) {
+			
+			this.easterCycle.add(this.rollCalendarAndGetCycleDay(cycle));
+			
+		}
+		
 	}
-
 
 	/**
 	 *
 	 */
-	public void getEasterDate(final int year) throws IllegalArgumentException {
+	public void getEaster(final int year) throws IllegalArgumentException {
 
-		this.easterDate = null;
+		this.easter = null;
 
 		// Protection
 		if ((year < 2010) && (year > 2030)) {
@@ -158,7 +143,7 @@ public class ProviderEasterDate {
 
 			if (yy.equals(other.substring(0, 4))) {
 
-				this.easterDate = Utils.dateToCalendar(other);
+				this.easter = Utils.dateToCalendar(other);
 				break;
 				
 			}
@@ -166,7 +151,7 @@ public class ProviderEasterDate {
 		}
 
 		// Protection
-		assert this.easterDate != null : "oOps, 'easterDate' is null";
+		assert this.easter != null : "oOps, 'easterDate' is null";
 
 	}
 
@@ -175,17 +160,17 @@ public class ProviderEasterDate {
 	 * @param cycleDay a day of the Easter cycle
 	 * @return A cycle day as <code>Event</code>
 	 */
-	private Event rollAndGetEvent(Eastercycle cycleDay) {
+	private Event rollCalendarAndGetCycleDay(Eastercycle cycleDay) {
 
 		int offsFromEaster = cycleDay.Offs();
 
-		this.easterDate.roll(Calendar.DAY_OF_YEAR, offsFromEaster);
+		this.easter.roll(Calendar.DAY_OF_YEAR, offsFromEaster);
 
 		Event e = EventImpl.createEvent(cycleDay.ordinal(), 
-				(Calendar) this.easterDate.clone());
+				(Calendar) this.easter.clone());
 
 		// reset to Easter date
-		this.easterDate.set(this.yy, this.mm, this.dd);
+		this.easter.set(this.yy, this.mm, this.dd);
 
 		return e;
 

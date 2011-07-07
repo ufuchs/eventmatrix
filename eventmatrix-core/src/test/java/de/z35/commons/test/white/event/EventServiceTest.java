@@ -118,7 +118,7 @@ public class EventServiceTest {
 
 		Calendar year = Utils.dateToCalendar("2011-01-01");
 
-		Vector<Event> cycleDays = easterDate.getEvents(year);
+		Vector<Event> cycleDays = easterDate.getEasterCycleAsEvents(year);
 		
 		System.out.println(cycleDays.toString());
 
