@@ -8,7 +8,6 @@
 
 package de.z35.commons.event;
 
-import java.util.Calendar;
 import java.util.Iterator;
 import java.util.Vector;
 
@@ -32,7 +31,7 @@ public class EventService {
 	/**
 	 *
 	 */
-	public EventService(Vector<Event> events) {
+	public EventService(final Vector<Event> events) {
 		this.events = events;
 	}
 
@@ -73,7 +72,7 @@ public class EventService {
 	 *
 	 * @param events
 	 */
-	public void setEvents(Vector<Event> events) {
+	public void setEvents(final Vector<Event> events) {
 		this.events = events;
 	}
 
@@ -83,7 +82,7 @@ public class EventService {
 	 * @param events
 	 * @param criteria
 	 */
-	public void trimEvents(Vector<Event> events, final Criteria criteria) {
+	public void trimEvents(final Vector<Event> events, final Criteria criteria) {
 
 		Iterator<Event> it = events.iterator();
 
@@ -98,20 +97,5 @@ public class EventService {
 		}
 
 	}
-
-    /**
-     *
-     * @param at
-     * @return
-     */
-    public boolean isWeekEnd(final Calendar at) {
-
-        assert at != null : "'date' can't be null";
-
-        int dayOfWeek = at.get(Calendar.DAY_OF_WEEK);
-
-        return (dayOfWeek == Calendar.SATURDAY) || (dayOfWeek == Calendar.SUNDAY);
-
-    }
 
 }

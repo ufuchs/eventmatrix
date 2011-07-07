@@ -6,8 +6,8 @@ import java.util.Vector;
 import org.testng.annotations.DataProvider;
 
 import de.z35.commons.event.Event;
+import de.z35.commons.event.EventImpl;
 import de.z35.commons.event.Utils;
-import de.z35.commons.test.white.event.impl.EventSimpleDate;
 
 public class EventProvider {
 
@@ -44,12 +44,8 @@ public class EventProvider {
 
 		for (Object[] event : SINGLE_DATE) {
 
-			Event e = new EventSimpleDate();
-
-			e.setClassifier((Integer) event[0] );
-
-			String at = (String) event[1];
-			e.setDateAt(Utils.dateToCalendar(at));
+			Event e = EventImpl.createEvent((Integer) event[0], 
+					Utils.dateToCalendar((String) event[1]));
 
 			result.add(e);
 

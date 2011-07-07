@@ -1,4 +1,4 @@
-package de.z35.commons.test.white.event.impl;
+package de.z35.commons.event;
 
 /*
  * %W% %E%
@@ -10,9 +10,25 @@ package de.z35.commons.test.white.event.impl;
 
 import java.util.Calendar;
 
-import de.z35.commons.event.Event;
 
-public class EventSimpleDate implements Event {
+public class EventImpl implements Event {
+
+	/**
+	 * 
+	 * @param classifier
+	 * @param dateAt
+	 * @return
+	 */
+	public static Event createEvent(Integer classifier, Calendar dateAt) {
+		
+		Event e= new EventImpl();
+		
+		e.setClassifier(classifier);
+		e.setDateAt(dateAt);
+		
+		return e;
+				
+	}
 
 	private Integer classifier;
 	private Calendar dateAt;
@@ -43,6 +59,24 @@ public class EventSimpleDate implements Event {
 	 */
 	public void setDateAt(Calendar dateAt) {
 		this.dateAt = dateAt;
+	}
+	
+	@Override
+	public String toString() {
+		
+		StringBuilder sb = new StringBuilder();
+		
+		sb.append("classifier : ").append(classifier).append(" | ");
+		sb.append("dateAt : ")
+			.append(dateAt.get(Calendar.YEAR))
+			.append("-")			
+			.append(dateAt.get(Calendar.MONTH) + 1)
+			.append("-")
+			.append(dateAt.get(Calendar.DATE))
+			.append("\n");
+		
+		
+		return sb.toString();
 	}
 
 }

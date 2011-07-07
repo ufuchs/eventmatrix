@@ -5,7 +5,7 @@ import java.util.Calendar;
 import de.z35.commons.event.Criteria;
 import de.z35.commons.event.Event;
 
-public class CriteriaDateFromTo implements Criteria {
+public class CriteriaByDateFromTo implements Criteria {
 
 	private Calendar from;
 	private Calendar to;
@@ -17,7 +17,7 @@ public class CriteriaDateFromTo implements Criteria {
      * @param from
      * @param to
      */
-    public CriteriaDateFromTo(Calendar from, Calendar to) {
+    public CriteriaByDateFromTo(Calendar from, Calendar to) {
         this.from = from;
         this.to = to;
 

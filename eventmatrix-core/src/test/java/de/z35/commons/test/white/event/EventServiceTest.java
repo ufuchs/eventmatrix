@@ -9,7 +9,8 @@ import static org.testng.Assert.assertNotNull;
 import de.z35.commons.event.Utils;
 import de.z35.commons.test.white.event.Provider.EventProvider;
 import de.z35.commons.test.white.event.impl.CriteriaByClassifier;
-import de.z35.commons.test.white.event.impl.CriteriaDateFromTo;
+import de.z35.commons.test.white.event.impl.CriteriaByDateFromTo;
+import de.z35.commons.test.white.event.impl.ProviderEasterDate;
 import org.testng.annotations.Test;
 
 import java.text.ParseException;
@@ -84,7 +85,7 @@ public class EventServiceTest {
         Calendar from = Utils.dateToCalendar("2011-06-04");
         Calendar to = Utils.dateToCalendar("2011-06-06");
 
-        Vector<Event> actual = es.getEvents(new CriteriaDateFromTo(from, to));
+        Vector<Event> actual = es.getEvents(new CriteriaByDateFromTo(from, to));
 
         assertEquals(actual.size(), 3);
 
@@ -104,11 +105,25 @@ public class EventServiceTest {
         Calendar from = Utils.dateToCalendar("2011-06-04");
         Calendar to = Utils.dateToCalendar("2011-06-04");
 
-        Vector<Event> actual = es.getEvents(new CriteriaDateFromTo(from, to));
+        Vector<Event> actual = es.getEvents(new CriteriaByDateFromTo(from, to));
 
         assertEquals(actual.size(), 1);
 
 	}
+
+	@Test
+	public void X_070_Test() throws Exception {
+
+		ProviderEasterDate easterDate = new ProviderEasterDate();
+
+		Calendar year = Utils.dateToCalendar("2011-01-01");
+
+		Vector<Event> cycleDays = easterDate.getEvents(year);
+		
+		System.out.println(cycleDays.toString());
+
+	}
+
 
 }
 
