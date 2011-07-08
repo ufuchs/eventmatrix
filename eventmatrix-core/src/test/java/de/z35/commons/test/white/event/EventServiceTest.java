@@ -10,7 +10,7 @@ import de.z35.commons.event.Utils;
 import de.z35.commons.test.white.event.Provider.EventProvider;
 import de.z35.commons.test.white.event.impl.CriteriaByClassifier;
 import de.z35.commons.test.white.event.impl.CriteriaByDateFromTo;
-import de.z35.commons.test.white.event.impl.ProviderEasterDate;
+import de.z35.commons.test.white.event.impl.ProviderEasterTide;
 import org.testng.annotations.Test;
 
 import java.text.ParseException;
@@ -114,11 +114,11 @@ public class EventServiceTest {
 	@Test
 	public void X_070_Test() throws Exception {
 
-		ProviderEasterDate easterDate = new ProviderEasterDate();
+		ProviderEasterTide easterDate = new ProviderEasterTide();
 
 		Calendar year = Utils.dateToCalendar("2011-01-01");
 
-		Vector<Event> cycleDays = easterDate.getEasterCycleAsEvents(year);
+		Vector<Event> cycleDays = easterDate.getEasterTide(year);
 		
 		System.out.println(cycleDays.toString());
 

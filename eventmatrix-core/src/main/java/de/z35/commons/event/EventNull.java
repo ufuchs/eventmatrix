@@ -1,15 +1,11 @@
 /*
- * %W% %E%
- *
  * Copyright (c) 2011 Uli Fuchs <ufuchs@gmx.com>
- * All rights reserved.
  * Released under the terms of the GNU GPL v2.0.
  */
 
 package de.z35.commons.event;
 
 import java.util.Calendar;
-import java.util.Locale;
 
 public class EventNull implements Event {
 
@@ -29,4 +25,9 @@ public class EventNull implements Event {
 	@Override
 	public void setDateAt(Calendar dateAt) {}
 
+	
+	public boolean isNull() {
+		return true;
+	}
+	
 }

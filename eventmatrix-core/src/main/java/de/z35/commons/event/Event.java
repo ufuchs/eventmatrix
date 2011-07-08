@@ -1,8 +1,5 @@
 /*
- * %W% %E%
- *
  * Copyright (c) 2011 Uli Fuchs <ufuchs@gmx.com>
- * All rights reserved.
  * Released under the terms of the GNU GPL v2.0.
  */
 
@@ -19,5 +16,7 @@ public interface Event {
 	Calendar getDateAt();
 
 	void setDateAt(final Calendar dateAt);
+	
+	boolean isNull();
 
 }
