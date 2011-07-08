@@ -7,10 +7,10 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
 import de.z35.commons.event.Utils;
+import de.z35.commons.event.provider.ProviderEasterTide;
 import de.z35.commons.test.white.event.Provider.EventProvider;
 import de.z35.commons.test.white.event.impl.CriteriaByClassifier;
 import de.z35.commons.test.white.event.impl.CriteriaByDateFromTo;
-import de.z35.commons.test.white.event.impl.ProviderEasterTide;
 import org.testng.annotations.Test;
 
 import java.text.ParseException;
@@ -76,7 +76,7 @@ public class EventServiceTest {
      * @throws ParseException
      */
 	@Test
-	public void X_050_Test() throws ParseException {
+	public void X_050_Test() {
 
 		EventService es = new EventService();
 

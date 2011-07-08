@@ -13,6 +13,10 @@ public interface Event {
 
 	void setClassifier(final Integer id);
 
+    String getClassifierVerbally();
+
+    void setClassifierVerbally(final String classifierVerbally);
+
 	Calendar getDateAt();
 
 	void setDateAt(final Calendar dateAt);

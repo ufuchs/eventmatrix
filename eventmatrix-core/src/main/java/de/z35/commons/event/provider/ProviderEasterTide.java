@@ -3,7 +3,7 @@
  * Released under the terms of the GNU GPL v2.0.
  */
 
-package de.z35.commons.test.white.event.impl;
+package de.z35.commons.event.provider;
 
 import java.util.Calendar;
 import java.util.Vector;
@@ -47,6 +47,17 @@ public class ProviderEasterTide {
 	 */
 	private static String[] EASTER = {
 
+		"2000-04-23",
+		"2001-04.15",
+		"2002-03-31",
+		"2003-04-20",
+		"2004-04-11",
+		"2005-03.27",
+		"2006-04-16",
+		"2007-04-08",
+		"2008-03-23",
+		"2009-04-12",
+		    
 		"2010-04-04",
 		"2011-04-24",
 		"2012-04-08",
@@ -57,6 +68,7 @@ public class ProviderEasterTide {
 		"2017-04-16",
 		"2018-04-01",
 		"2019-04-21",
+		
 		"2020-04-12",
 		"2021-04-04",
 		"2022-04-17",
@@ -68,7 +80,7 @@ public class ProviderEasterTide {
 		"2028-04-16",
 		"2029-04-01",
 		"2030-04-21"
-
+		
 	};
 
 	/**
@@ -96,6 +108,32 @@ public class ProviderEasterTide {
 	}
 
 	/**
+	 * 
+	 * @return
+	 */
+	private String nameOfDay(EasterTide dayOfTide) {
+		
+		String result = null;
+		
+		String[] parts = dayOfTide.name().split("_");
+		
+		for (String part : parts) {
+			
+			String capitalized = part.substring(0,1) 
+				+ part.substring(1).toLowerCase() + " ";
+			
+			if (result == null) {
+				result = capitalized;
+			} else {
+				result += capitalized;
+			}
+			
+		}
+		
+		return result.trim(); 
+	}
+	
+	/**
 	 *
 	 * @param year
 	 * @return
@@ -114,8 +152,10 @@ public class ProviderEasterTide {
 		for (EasterTide dayOfTide : EasterTide.values()) {
 			
 			Calendar day = getDayOfTide(easter, dayOfTide, yy, mm, dd);
-			
-			Event e = EventImpl.createEvent(dayOfTide.ordinal(), day); 
+
+
+            String s = nameOfDay(dayOfTide);
+			Event e = EventImpl.createEvent(dayOfTide.ordinal(), s, day);
 			
 			easterTide.add(e);
 			
@@ -159,7 +199,7 @@ public class ProviderEasterTide {
 	 * @param dd
 	 * @return
 	 */
-	public Calendar getDayOfTide(Calendar easter, EasterTide dayOfTide, int yy, int mm, int dd) {
+	private Calendar getDayOfTide(Calendar easter, EasterTide dayOfTide, int yy, int mm, int dd) {
 
 		// Easter is the _first_ day in the Eastertide.
 		// To calc correctly there is a subtraction of one day necessary.

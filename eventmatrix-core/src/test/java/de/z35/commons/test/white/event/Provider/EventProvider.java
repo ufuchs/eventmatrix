@@ -38,14 +38,14 @@ public class EventProvider {
 	 * @return
 	 * @throws ParseException
 	 */
-	public static Vector<Event> getSingleDateAsVector() throws ParseException {
+	public static Vector<Event> getSingleDateAsVector() {
 
 		Vector<Event> result = new Vector<Event>();
 
 		for (Object[] event : SINGLE_DATE) {
 
-			Event e = EventImpl.createEvent((Integer) event[0], 
-					Utils.dateToCalendar((String) event[1]));
+			Event e = EventImpl.createEvent((Integer) event[0],
+                    null, Utils.dateToCalendar((String) event[1]));
 
 			result.add(e);
 

@@ -9,23 +9,24 @@ import java.util.Calendar;
 
 public class EventNull implements Event {
 
-	@Override
 	public Integer getClassifier() {
 		return 0;
 	}
 
-	@Override
 	public void setClassifier(Integer id) {}
 
-	@Override
+    public String getClassifierVerbally() {
+        return "";
+    }
+
+    public void setClassifierVerbally(String desc) {}
+
 	public Calendar getDateAt() {
 		return Calendar.getInstance();
 	}
 
-	@Override
 	public void setDateAt(Calendar dateAt) {}
 
-	
 	public boolean isNull() {
 		return true;
 	}
