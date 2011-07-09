@@ -7,6 +7,6 @@
   </parent>
   <groupId>de.z35.commons</groupId>
   <artifactId>eventmatrix-core</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>0.1-SNAPSHOT</version>
   <name>eventmatrix-core</name>
 </project>

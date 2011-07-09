@@ -12,8 +12,6 @@
 	<inceptionYear>2011</inceptionYear>
 
 	<properties>
-		<project.compiler.source>1.6</project.compiler.source>
-		<project.compiler.target>1.6</project.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
@@ -29,8 +27,8 @@
 					<fork>true</fork>
 					<meminitial>128m</meminitial>
 					<maxmem>512m</maxmem>
-				 <source>$(project.compiler.source)</source>
-				 <target>$(project.compiler.target)</target>
+				 <source>1.6</source>
+				 <target>1.6</target>
 				</configuration>
 			</plugin>
 
@@ -108,6 +106,7 @@
 
 	<modules>
 		<module>eventmatrix-core</module>
+		<module>eventmatrix-examples</module>
 	</modules>
 
 </project>

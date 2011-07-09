@@ -52,7 +52,7 @@ public class ProviderEasterTide {
 		"2002-03-31",
 		"2003-04-20",
 		"2004-04-11",
-		"2005-03.27",
+		"2005-03-27",
 		"2006-04-16",
 		"2007-04-08",
 		"2008-03-23",
@@ -153,9 +153,7 @@ public class ProviderEasterTide {
 			
 			Calendar day = getDayOfTide(easter, dayOfTide, yy, mm, dd);
 
-
-            String s = nameOfDay(dayOfTide);
-			Event e = EventImpl.createEvent(dayOfTide.ordinal(), s, day);
+			Event e = EventImpl.createEvent(dayOfTide.ordinal(), nameOfDay(dayOfTide), day);
 			
 			easterTide.add(e);
 			
@@ -171,7 +169,7 @@ public class ProviderEasterTide {
 	public static Calendar getEaster(final int year) throws IllegalArgumentException {
 
 		// Protection
-		if ((year < 2010) && (year > 2030)) {
+		if ((year < 2000) && (year > 2030)) {
 			throw new IllegalArgumentException();
 		}
 		
