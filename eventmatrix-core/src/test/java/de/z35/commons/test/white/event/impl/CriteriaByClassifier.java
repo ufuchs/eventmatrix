@@ -6,7 +6,7 @@
 package de.z35.commons.test.white.event.impl;
 
 import de.z35.commons.event.Criteria;
-import de.z35.commons.event.Event;
+import de.z35.commons.test.white.event.Event;
 
 /**
  * Created by IntelliJ IDEA.
@@ -15,7 +15,7 @@ import de.z35.commons.event.Event;
  * Time: 20:20
  * To change this template use File | Settings | File Templates.
  */
-public class CriteriaByClassifier implements Criteria {
+public class CriteriaByClassifier implements Criteria<Event> {
 
     private Integer classifier;
 

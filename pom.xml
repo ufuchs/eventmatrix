@@ -106,9 +106,9 @@
 
 	<modules>
 		<module>eventmatrix-core</module>
-		<!-- 
+
 		<module>eventmatrix-examples</module>
-		 -->
+
 	</modules>
 
 </project>

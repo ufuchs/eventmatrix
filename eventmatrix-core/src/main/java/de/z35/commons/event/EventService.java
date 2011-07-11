@@ -1,20 +1,15 @@
-/*
- * Copyright (c) 2011 Uli Fuchs <ufuchs@gmx.com>
- * Released under the terms of the GNU GPL v2.0.
- */
-
 package de.z35.commons.event;
 
 import java.util.Iterator;
 import java.util.Vector;
 
-public class EventService {
+public class EventService<T> {
 
 	// /////////////////////////////////////////////////////////////////////////
 	// fields
 	// /////////////////////////////////////////////////////////////////////////
 
-	protected Vector<Event> events;
+	protected Vector<T> elements;
 
 	// /////////////////////////////////////////////////////////////////////////
 	// ctor
@@ -28,8 +23,8 @@ public class EventService {
 	/**
 	 *
 	 */
-	public EventService(final Vector<Event> events) {
-		this.events = events;
+	public EventService(final Vector<T> elements) {
+		this.elements = elements;
 	}
 
 	// /////////////////////////////////////////////////////////////////////////
@@ -40,23 +35,31 @@ public class EventService {
 	 *
 	 * @return
 	 */
-	public Vector<Event> getEvents() {
-		return this.events;
+	public Vector<T> getElements() {
+		return this.elements;
 	}
 
 	/**
 	 *
-	 * @param criteria
+	 * @param elements
+	 */
+	public void setElements(Vector<T> elements) {
+		this.elements = elements;
+	}
+	
+	/**
+	 *
+	 * @param c
 	 * @return
 	 */
-	public Vector<Event> getEvents(final Criteria criteria) {
+	public Vector<T> selectAll(Criteria<T> c) {
 
-		Vector<Event> result = new Vector<Event>();
+		Vector<T> result = new Vector<T>();
 
-		for (Event e : this.events) {
+		for (T t : this.elements) {
 
-			if (criteria.match(e)) {
-				result.add(e);
+			if (c.match(t)) {
+				result.add(t);
 			}
 
 		}
@@ -67,32 +70,24 @@ public class EventService {
 
 	/**
 	 *
-	 * @param events
+	 * @param elements
+	 * @param c
 	 */
-	public void setEvents(final Vector<Event> events) {
-		this.events = events;
-	}
+	public static <T> void shrink(Vector<T> elements, Criteria<T> c) {
 
-
-	/**
-	 *
-	 * @param events
-	 * @param criteria
-	 */
-	public void trimEvents(final Vector<Event> events, final Criteria criteria) {
-
-		Iterator<Event> it = events.iterator();
+		Iterator<T> it = elements.iterator();
 
 		while (it.hasNext()) {
 
-			Event e = it.next();
+			T t = it.next();
 
-			if (criteria.match(e)) {
+			if (c.match(t)) {
 				it.remove();
 			}
 
 		}
 
 	}
-
+	
+	
 }

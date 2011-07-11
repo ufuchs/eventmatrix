@@ -9,9 +9,9 @@ package de.z35.commons.test.white.event.impl;
 import java.util.Calendar;
 
 import de.z35.commons.event.Criteria;
-import de.z35.commons.event.Event;
+import de.z35.commons.test.white.event.Event;
 
-public class CriteriaByDateFromTo implements Criteria {
+public class CriteriaByDateFromTo implements Criteria<Event> {
 
 	private Calendar from;
 	private Calendar to;

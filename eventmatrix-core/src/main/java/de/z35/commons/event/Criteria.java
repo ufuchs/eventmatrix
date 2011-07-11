@@ -5,8 +5,8 @@
 
 package de.z35.commons.event;
 
-public interface Criteria {
+public interface Criteria<T> {
 
-	public boolean match(final Event e);
+	public boolean match(T t);
 
 }

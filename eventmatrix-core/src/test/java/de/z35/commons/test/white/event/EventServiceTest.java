@@ -1,14 +1,12 @@
 package de.z35.commons.test.white.event;
 
-import de.z35.commons.event.Event;
 import de.z35.commons.event.EventService;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
-import de.z35.commons.event.Utils;
-import de.z35.commons.event.provider.ProviderEasterTide;
 import de.z35.commons.test.white.event.Provider.EventProvider;
+import de.z35.commons.test.white.event.Provider.ProviderEasterTide;
 import de.z35.commons.test.white.event.impl.CriteriaByClassifier;
 import de.z35.commons.test.white.event.impl.CriteriaByDateFromTo;
 import org.testng.annotations.Test;
@@ -24,7 +22,7 @@ public class EventServiceTest {
 	 */
 	@Test
 	public void X_010_Test() {
-		EventService es = new EventService();
+		EventService<Event> es = new EventService<Event>();
 		assertNotNull(es);
 	}
 
@@ -47,11 +45,11 @@ public class EventServiceTest {
 
 		Vector<Event> events = EventProvider.getSingleDateAsVector();
 
-		EventService es = new EventService();
+		EventService<Event> es = new EventService<Event>();
 
-		es.setEvents(events);
+		es.setElements(events);
 
-        assertNotNull(es.getEvents());
+        assertNotNull(es.getElements());
 	}
 
     /**
@@ -61,11 +59,11 @@ public class EventServiceTest {
 	@Test
 	public void X_040_Test() throws ParseException {
 
-		EventService es = new EventService();
+		EventService<Event> es = new EventService<Event>();
 
-		es.setEvents(EventProvider.getSingleDateAsVector());
+		es.setElements(EventProvider.getSingleDateAsVector());
 
-        Vector<Event> actual = es.getEvents(new CriteriaByClassifier(1));
+        Vector<Event> actual = es.selectAll(new CriteriaByClassifier(1));
 
         assertEquals(actual.size(), 4);
 
@@ -78,14 +76,14 @@ public class EventServiceTest {
 	@Test
 	public void X_050_Test() {
 
-		EventService es = new EventService();
+		EventService<Event> es = new EventService<Event>();
 
-		es.setEvents(EventProvider.getSingleDateAsVector());
+		es.setElements(EventProvider.getSingleDateAsVector());
 
         Calendar from = Utils.dateToCalendar("2011-06-04");
         Calendar to = Utils.dateToCalendar("2011-06-06");
 
-        Vector<Event> actual = es.getEvents(new CriteriaByDateFromTo(from, to));
+        Vector<Event> actual = es.selectAll(new CriteriaByDateFromTo(from, to));
 
         assertEquals(actual.size(), 3);
 
@@ -98,14 +96,14 @@ public class EventServiceTest {
 	@Test
 	public void X_060_Test() throws ParseException {
 
-		EventService es = new EventService();
+		EventService<Event> es = new EventService<Event>();
 
-		es.setEvents(EventProvider.getSingleDateAsVector());
+		es.setElements(EventProvider.getSingleDateAsVector());
 
         Calendar from = Utils.dateToCalendar("2011-06-04");
         Calendar to = Utils.dateToCalendar("2011-06-04");
 
-        Vector<Event> actual = es.getEvents(new CriteriaByDateFromTo(from, to));
+        Vector<Event> actual = es.selectAll(new CriteriaByDateFromTo(from, to));
 
         assertEquals(actual.size(), 1);
 

@@ -5,9 +5,9 @@ import java.util.Vector;
 
 import org.testng.annotations.DataProvider;
 
-import de.z35.commons.event.Event;
-import de.z35.commons.event.EventImpl;
-import de.z35.commons.event.Utils;
+import de.z35.commons.test.white.event.Event;
+import de.z35.commons.test.white.event.EventImpl;
+import de.z35.commons.test.white.event.Utils;
 
 public class EventProvider {
 
