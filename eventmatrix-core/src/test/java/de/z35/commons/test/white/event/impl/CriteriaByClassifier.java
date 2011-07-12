@@ -5,7 +5,7 @@
 
 package de.z35.commons.test.white.event.impl;
 
-import de.z35.commons.event.Criteria;
+import de.z35.commons.collections.Predicate;
 import de.z35.commons.test.white.event.Event;
 
 /**
@@ -15,7 +15,7 @@ import de.z35.commons.test.white.event.Event;
  * Time: 20:20
  * To change this template use File | Settings | File Templates.
  */
-public class CriteriaByClassifier implements Criteria<Event> {
+public class CriteriaByClassifier implements Predicate<Event> {
 
     private Integer classifier;
 
@@ -38,7 +38,7 @@ public class CriteriaByClassifier implements Criteria<Event> {
      * @param e
      * @return
      */
-    public boolean match(Event e) {
+    public boolean evaluate(Event e) {
 
         return e.getClassifier().compareTo(this.classifier) != 0;
 

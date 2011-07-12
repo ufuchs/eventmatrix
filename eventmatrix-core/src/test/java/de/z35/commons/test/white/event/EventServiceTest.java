@@ -1,6 +1,6 @@
 package de.z35.commons.test.white.event;
 
-import de.z35.commons.event.EventService;
+import de.z35.commons.collections.EventService;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;

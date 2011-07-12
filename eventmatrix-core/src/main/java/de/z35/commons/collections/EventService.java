@@ -1,14 +1,24 @@
-package de.z35.commons.event;
+/*
+ * Copyright (c) 2011 Uli Fuchs <ufuchs@gmx.com>
+ * Released under the terms of the GNU GPL v2.0.
+ */
+
+package de.z35.commons.collections;
 
 import java.util.Iterator;
 import java.util.Vector;
 
-public class EventService<T> {
+public class EventService<T> extends Vector<T>{
 
 	// /////////////////////////////////////////////////////////////////////////
 	// fields
 	// /////////////////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1972616780362106046L;
+	
 	protected Vector<T> elements;
 
 	// /////////////////////////////////////////////////////////////////////////
@@ -52,17 +62,27 @@ public class EventService<T> {
 	 * @param c
 	 * @return
 	 */
-	public Vector<T> selectAll(Criteria<T> c) {
+	public synchronized Vector<T> selectAll(Predicate<T> c) {
 
 		Vector<T> result = new Vector<T>();
 
-		for (T t : this.elements) {
-
-			if (c.match(t)) {
+		for (int i = 0; i < super.elementData.length; i++){
+			T t = (T)super.elementData[i];
+			if (c.evaluate(t)) {
 				result.add(t);
 			}
-
+			
 		}
+			
+		
+		
+//		for (T t : (T) super.elementData) {
+//
+//			if (c.match(t)) {
+//				result.add(t);
+//			}
+//
+//		}
 
 		return result;
 
@@ -73,7 +93,7 @@ public class EventService<T> {
 	 * @param elements
 	 * @param c
 	 */
-	public static <T> void shrink(Vector<T> elements, Criteria<T> c) {
+	public static synchronized <T> void shrink(Vector<T> elements, Predicate<T> c) {
 
 		Iterator<T> it = elements.iterator();
 
@@ -81,7 +101,7 @@ public class EventService<T> {
 
 			T t = it.next();
 
-			if (c.match(t)) {
+			if (c.evaluate(t)) {
 				it.remove();
 			}
 

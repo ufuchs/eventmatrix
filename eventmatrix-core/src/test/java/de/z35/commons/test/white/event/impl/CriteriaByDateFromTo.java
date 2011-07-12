@@ -8,10 +8,10 @@ package de.z35.commons.test.white.event.impl;
 
 import java.util.Calendar;
 
-import de.z35.commons.event.Criteria;
+import de.z35.commons.collections.Predicate;
 import de.z35.commons.test.white.event.Event;
 
-public class CriteriaByDateFromTo implements Criteria<Event> {
+public class CriteriaByDateFromTo implements Predicate<Event> {
 
 	private Calendar from;
 	private Calendar to;
@@ -34,7 +34,7 @@ public class CriteriaByDateFromTo implements Criteria<Event> {
      * @param e
      * @return
      */
-	public boolean match(Event e) {
+	public boolean evaluate(Event e) {
 
 		return !(e.getDateAt().before(this.from) || e.getDateAt().after(this.to));
 

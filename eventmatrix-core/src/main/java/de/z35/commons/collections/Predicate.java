@@ -3,10 +3,10 @@
  * Released under the terms of the GNU GPL v2.0.
  */
 
-package de.z35.commons.event;
+package de.z35.commons.collections;
 
-public interface Criteria<T> {
+public interface Predicate<T> {
 
-	public boolean match(T t);
+	public boolean evaluate(T t);
 
 }
