@@ -6,7 +6,7 @@
 package de.z35.commons.test.white.event.impl;
 
 import de.z35.commons.collections.Predicate;
-import de.z35.commons.test.white.event.Event;
+import de.z35.commons.test.white.event.Order;
 
 /**
  * Created by IntelliJ IDEA.
@@ -15,7 +15,7 @@ import de.z35.commons.test.white.event.Event;
  * Time: 20:20
  * To change this template use File | Settings | File Templates.
  */
-public class CriteriaByClassifier implements Predicate<Event> {
+public class PredicateByDate implements Predicate<Order> {
 
     private Integer classifier;
 
@@ -23,11 +23,15 @@ public class CriteriaByClassifier implements Predicate<Event> {
      *
      * @param classifier
      */
-    public CriteriaByClassifier(Integer classifier) {
+    public PredicateByDate(Integer classifier) {
 
         assert classifier != null : "'classifier' can't be null.";
         this.classifier = classifier;
+        // order date
+        // order confirmation date
+        // ship date
 
+        //
     }
 
     /**
@@ -38,9 +42,9 @@ public class CriteriaByClassifier implements Predicate<Event> {
      * @param e
      * @return
      */
-    public boolean evaluate(Event e) {
+    public boolean evaluate(Order e) {
 
-        return e.getClassifier().compareTo(this.classifier) != 0;
+        return false;
 
     }
 

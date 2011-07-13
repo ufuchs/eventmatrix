@@ -9,9 +9,9 @@ package de.z35.commons.test.white.event.impl;
 import java.util.Calendar;
 
 import de.z35.commons.collections.Predicate;
-import de.z35.commons.test.white.event.Event;
+import de.z35.commons.test.white.event.Order;
 
-public class CriteriaByDateFromTo implements Predicate<Event> {
+public class PredicateByOrderStatus implements Predicate<Order> {
 
 	private Calendar from;
 	private Calendar to;
@@ -23,7 +23,7 @@ public class CriteriaByDateFromTo implements Predicate<Event> {
      * @param from
      * @param to
      */
-    public CriteriaByDateFromTo(Calendar from, Calendar to) {
+    public PredicateByOrderStatus(Calendar from, Calendar to) {
         this.from = from;
         this.to = to;
 
@@ -34,9 +34,9 @@ public class CriteriaByDateFromTo implements Predicate<Event> {
      * @param e
      * @return
      */
-	public boolean evaluate(Event e) {
+	public boolean evaluate(Order o) {
 
-		return !(e.getDateAt().before(this.from) || e.getDateAt().after(this.to));
+		return false;
 
 	}
 

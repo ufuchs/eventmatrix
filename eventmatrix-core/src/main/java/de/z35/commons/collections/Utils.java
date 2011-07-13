@@ -3,6 +3,7 @@ package de.z35.commons.collections;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Vector;
+import de.z35.commons.collections.Predicate;
 
 /*
  * This IS and WILL NOT BE any substitute against the famous apache.commons.collections - framework
@@ -10,6 +11,31 @@ import java.util.Vector;
  */
 public class Utils {
 
+	/**
+	 * 
+	 * @param <To>
+	 * @param from
+	 * @param transformer
+	 * @return
+	 */
+	public static synchronized <From,To> Collection<To> transform(Collection<From> from, Transformer<From,To> transformer) {
+		
+		Collection<To> result = new Vector<To>();
+		
+		Iterator<From> it = from.iterator();
+
+		while (it.hasNext()) {
+
+			From f = it.next();
+
+			result.add(transformer.transform(f));
+
+		}
+		
+		return result;
+
+	}
+	
 	/**
 	 * Selects all elements from input collection which match the given predicate into an output collection.
 	 * @param <T>
