@@ -25,9 +25,9 @@
   		</dependency>
   	</dependencies>
   </dependencyManagement>
-  
+
   <modules>
-		<module>em-todo.txt</module>
-	</modules>
+		<module>freedays</module>
+  </modules>
 
 </project>
