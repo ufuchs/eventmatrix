@@ -11,7 +11,7 @@ public class Holiday {
 	 * @return
 	 */
 	public static Holiday createHoliday(String date, String name) {
-		return createHoliday(Utils.dateToCalendar(date), name);
+		return createHoliday(DateTimeUtils.dateToCalendar(date), name);
 	}
 
 	/**
@@ -77,19 +77,13 @@ public class Holiday {
 		String LS = System.getProperty("line.separator");
 
 		StringBuilder sb = new StringBuilder();
-
-		sb
-			.append(name)
+		
+		sb.append(name)
 			.append(" on ")
-			.append(date.get(Calendar.YEAR))
-			.append("-")
-			.append(date.get(Calendar.MONTH) + 1)
-			.append("-")
-			.append(date.get(Calendar.DATE))
+			.append(DateTimeUtils.calToString(date))
 			.append(LS);
 
 		return sb.toString();
-
 
 	}
 

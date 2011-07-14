@@ -215,13 +215,13 @@ public class EasterTideProvider {
 
 			if (yy.equals(other.substring(0, 4))) {
 
-				return Utils.dateToCalendar(other);
+				return DateTimeUtils.dateToCalendar(other);
 
 			}
 
 		}
 
-		return Utils.dateToCalendar("0000-01-01");
+		return DateTimeUtils.dateToCalendar("0000-01-01");
 
 	}
 

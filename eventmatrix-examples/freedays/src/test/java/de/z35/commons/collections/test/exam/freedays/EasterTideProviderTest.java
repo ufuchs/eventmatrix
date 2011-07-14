@@ -13,8 +13,8 @@ import de.z35.commons.collections.exam.freedays.EasterTideProvider;
 import de.z35.commons.collections.exam.freedays.EasterTideProvider.DayOfTide;
 import de.z35.commons.collections.exam.freedays.EasterTideTransformer;
 import de.z35.commons.collections.exam.freedays.Holiday;
+import de.z35.commons.collections.exam.freedays.DateTimeUtils;
 import de.z35.commons.collections.exam.freedays.WeekEndPredicate;
-import de.z35.commons.test.white.event.Utils;
 
 public class EasterTideProviderTest {
 
@@ -29,7 +29,7 @@ public class EasterTideProviderTest {
 
 		EasterTideProvider itsETP = new EasterTideProvider();
 
-		Calendar year = Utils.dateToCalendar("2011-01-01");
+		Calendar year = DateTimeUtils.dateToCalendar("2011-01-01");
 
 		Vector<DayOfTide> easterTide = itsETP.getEasterTide(year);
 
@@ -48,7 +48,7 @@ public class EasterTideProviderTest {
 
 		EasterTideProvider itsETP = new EasterTideProvider();
 
-		Calendar year = Utils.dateToCalendar("2011-01-01");
+		Calendar year = DateTimeUtils.dateToCalendar("2011-01-01");
 
 		Vector<DayOfTide> easterTide = itsETP.getEasterTide(year);
 
@@ -66,7 +66,7 @@ public class EasterTideProviderTest {
 
 		EasterTideProvider itsETP = new EasterTideProvider();
 
-		Calendar year = Utils.dateToCalendar("2011-01-01");
+		Calendar year = DateTimeUtils.dateToCalendar("2011-01-01");
 
 		Vector<DayOfTide> easterTide = itsETP.getEasterTide(year);
 
