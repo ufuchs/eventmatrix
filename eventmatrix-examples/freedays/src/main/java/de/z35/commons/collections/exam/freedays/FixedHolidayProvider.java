@@ -13,7 +13,26 @@ public class FixedHolidayProvider {
 		{"10-03	", "Day of German Unity"},
 		{"12-25", "Christmas Day"},
 		{"12-26", "Second Christmas Day"},
+		{"M3.2.0", "Start of Day Light Savings"},
+		{"M11.1.0", "End of Day Light Savings"},
 	};
+
+    /**
+     * @see http://wwp.greenwichmeantime.com/time-zone/rules/usa/
+     *
+     * Eastern : export TZ="EST5EDT4,M3.2.0/02:00,M11.1.0/02:00"
+     * Central : export TZ="CST6CDT5,M3.2.0/02:00,M11.1.0/02:00"
+     * Mountain: export TZ="MST7MDT6,M3.2.0/02:00,M11.1.0/02:00"
+     * Pacific : export TZ="PST8PDT7,M3.2.0/02:00,M11.1.0/02:00"
+     */
+    public static String[][] dayLightSavings_en_US = new String[][] {
+        {"M3.2.0", "Start of Day Light Savings"},
+        {"M11.1.0", "End of Day Light Savings"},
+    };
+
+    FixedHolidayProviderStrategyISO fhpsISO = new FixedHolidayProviderStrategyISO();
+    
+    FixedHolidayProviderStrategyPOSIX fhpsPOSIX = new FixedHolidayProviderStrategyPOSIX();
 
 	/**
 	 * state 'Berlin'
@@ -33,17 +52,28 @@ public class FixedHolidayProvider {
 	 *
 	 * @return
 	 */
-	public Vector<Holiday> getFixedHolidays(int year) {
+	public Vector<Holiday> getFixedHolidays(String[][] fixedHolidays, int year) {
 
 		Vector<Holiday> holidays = new Vector<Holiday>();
 
-		for (String[] h : fixedHolidays_de_DE) {
 
-			String format = "%d-" + h[0];
+		for (String[] part : fixedHolidays) {
+			
+			String date = null;
+			
+			boolean isDigit = Character.isDigit(part[0].charAt(0));
+			
+			FixedHolidayProviderStrategy fhps;
+			
+			if (isDigit) {
+				fhps = fhpsISO;
+			} else {
+				fhps = fhpsPOSIX;
+			}
 
-			String date = String.format(format, year);
-
-			holidays.add(Holiday.createHoliday(date, h[1]));
+			date = fhps.transformTemplate(year, part[0]);
+			
+			holidays.add(Holiday.createHoliday(date, part[1]));
 
 		}
 

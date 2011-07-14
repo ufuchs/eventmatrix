@@ -26,7 +26,7 @@ public class FixedHolidayProviderTest {
 
 		FixedHolidayProvider itsFHP = new FixedHolidayProvider();
 
-		Vector<Holiday> holidays = itsFHP.getFixedHolidays(2011);
+		Vector<Holiday> holidays = itsFHP.getFixedHolidays(FixedHolidayProvider.fixedHolidays_de_DE, 2011);
 
 		System.out.print(holidays.toString());
 		System.out.println();
@@ -38,7 +38,7 @@ public class FixedHolidayProviderTest {
 
 		FixedHolidayProvider itsFHP = new FixedHolidayProvider();
 
-		Vector<Holiday> holidays = itsFHP.getFixedHolidays(2011);
+		Vector<Holiday> holidays = itsFHP.getFixedHolidays(FixedHolidayProvider.fixedHolidays_de_DE, 2011);
 
 		Predicate<Holiday> p = new WeekEndPredicate();
 
