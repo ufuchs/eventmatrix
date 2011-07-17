@@ -8,5 +8,6 @@ package de.z35.commons.collections.exam.freedays;
  * To change this template use File | Settings | File Templates.
  */
 public interface FixedHolidayProviderStrategy {
-    String transformTemplate(int year, String dateTemplate);
+	void setParams(int year, String dateTemplate);
+    String transformTemplate();
 }

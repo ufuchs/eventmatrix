@@ -13,15 +13,27 @@ package de.z35.commons.collections.exam.freedays;
  * Time: 21:15
  * To change this template use File | Settings | File Templates.
  */
-public class FixedHolidayProviderStrategyISO implements FixedHolidayProviderStrategy {
+public class HolidayProviderStrategyFixed implements FixedHolidayProviderStrategy {
 
+	private int year; 
+	private String dateTemplate;
+	
     @Override
-    public String transformTemplate(int year, String dateTemplate) {
+    public String transformTemplate() {
 
 		String format = "%d-" + dateTemplate;
 
-		return String.format(format, year);
+		return String.format(format, this.year);
 
     }
+
+	@Override
+	public void setParams(int year, String dateTemplate) {
+		
+		this.year = year;
+		this.dateTemplate = dateTemplate;
+				
+	}
+
 
 }
