@@ -21,16 +21,12 @@ public class CollectionUtils {
 	public static synchronized <From,To> Collection<To> transform(Collection<From> from, Transformer<From,To> transformer) {
 		
 		Collection<To> result = new Vector<To>();
-		
-		Iterator<From> it = from.iterator();
 
-		while (it.hasNext()) {
+        for (From f : from) {
 
-			From f = it.next();
+            result.add(transformer.transform(f));
 
-			result.add(transformer.transform(f));
-
-		}
+        }
 		
 		return result;
 
@@ -75,18 +71,14 @@ public class CollectionUtils {
 	public static synchronized <T> Collection<T> selectRejected(Collection<T> c, Predicate<T> p) {
 
 		Collection<T> result = new Vector<T>();
-		
-		Iterator<T> it = c.iterator();
 
-		while (it.hasNext()) {
+        for (T e : c) {
 
-			T e = it.next();
+            if (!p.evaluate(e)) {
+                result.add(e);
+            }
 
-			if (!p.evaluate(e)) {
-				result.add(e);
-			}
-
-		}
+        }
 		
 		return result;
 		

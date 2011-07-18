@@ -61,7 +61,6 @@ public class Holiday {
 
 	/**
 	 *
-	 * @param date
 	 * @return
 	 */
 	private boolean isWeekEnd() {

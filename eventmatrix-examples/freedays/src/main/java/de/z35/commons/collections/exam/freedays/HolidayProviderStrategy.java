@@ -7,7 +7,7 @@ package de.z35.commons.collections.exam.freedays;
  * Time: 21:21
  * To change this template use File | Settings | File Templates.
  */
-public interface FixedHolidayProviderStrategy {
+public interface HolidayProviderStrategy {
 	void setParams(int year, String dateTemplate);
     String transformTemplate();
 }

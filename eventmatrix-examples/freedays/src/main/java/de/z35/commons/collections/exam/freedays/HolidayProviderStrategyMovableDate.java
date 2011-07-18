@@ -9,7 +9,7 @@ import java.util.Calendar;
  * @author ufuchs
  *
  */
-public class HolidayProviderStrategyMoveable implements FixedHolidayProviderStrategy {
+public class HolidayProviderStrategyMovableDate implements HolidayProviderStrategy {
 
 	static int MONTH = 0;
 	static int OCCURRENCE_IN_MONTH = 1;
@@ -67,8 +67,11 @@ public class HolidayProviderStrategyMoveable implements FixedHolidayProviderStra
 		cal.set(Calendar.MONTH, this.month);
 		cal.set(Calendar.DAY_OF_MONTH, 1);
 		
-		int dayOfMonth = getEarliestDay()
-			+ calculateOffset(cal.get(Calendar.DAY_OF_WEEK), this.dayOfWeek);
+		int earliestDay = getEarliestDay(); 
+		
+		int offs = calculateOffset(cal.get(Calendar.DAY_OF_WEEK), this.dayOfWeek);
+		
+		int dayOfMonth = earliestDay + offs;
 		
 	    if (this.occurenceInMonth > 4) {
 	    	dayOfMonth += getOffsetToLastOccurrence(cal, dayOfMonth);
@@ -113,10 +116,10 @@ public class HolidayProviderStrategyMoveable implements FixedHolidayProviderStra
 			subtrahend = 2;
 		}
  
-		int earliestDay = this.dayOfWeek 
+		int earliestDay = (this.dayOfWeek - 1) 
 			+ 7 * (this.occurenceInMonth - subtrahend);
 		
-	    return earliestDay - 1;
+	    return earliestDay;
 		
 	}
 
@@ -136,15 +139,17 @@ public class HolidayProviderStrategyMoveable implements FixedHolidayProviderStra
 	    monthStartsOnDay -= 1;
 	    dayOfWeek = dayOfWeek - 1;
 
-	    // 'michaelthompson's tightened implementation
 	    int offset = 0;
 	    
 		if (dayOfWeek != monthStartsOnDay) {
 			
-			offset = dayOfWeek + (7 - monthStartsOnDay);
+			offset = dayOfWeek - monthStartsOnDay + 7;
 			
-			if (dayOfWeek > monthStartsOnDay) {
-				offset -= 7;
+			if (dayOfWeek < monthStartsOnDay) {
+				// offset = dayOfWeek + -7 + monthStartsOnDay ;
+			} else {
+				offset = ((dayOfWeek + (7 - monthStartsOnDay)) - 7);
+				offset = dayOfWeek - monthStartsOnDay + 7 - 7;
 			}
 			
 		}
