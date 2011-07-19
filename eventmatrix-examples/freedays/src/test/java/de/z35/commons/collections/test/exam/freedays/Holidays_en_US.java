@@ -15,6 +15,7 @@ package de.z35.commons.collections.test.exam.freedays;
  */
 public class Holidays_en_US {
 
+	// the first day is SUNDAY corresponding to day number 1  
     public static Object[][] HOLIDAYS_2011_en_US = new Object[][] {
 
             {"2011-01-01", "01-01", "New Year's Day"},

@@ -67,9 +67,19 @@ public class HolidayProviderStrategyMovableDate implements HolidayProviderStrate
 		cal.set(Calendar.MONTH, this.month);
 		cal.set(Calendar.DAY_OF_MONTH, 1);
 		
-		int earliestDay = getEarliestDay(); 
+		// /////////////////////////////////////////////////////////////////////
 		
-		int offs = calculateOffset(cal.get(Calendar.DAY_OF_WEEK), this.dayOfWeek);
+		int corr = 0;
+		
+		int dayOfWeek = this.dayOfWeek + corr;
+		
+		int monthStartsOnDay = cal.get(Calendar.DAY_OF_WEEK) + corr;
+
+		// /////////////////////////////////////////////////////////////////////
+		
+		int earliestDay = getEarliestDay(dayOfWeek); 
+		
+		int offs = calculateOffset(monthStartsOnDay, dayOfWeek);
 		
 		int dayOfMonth = earliestDay + offs;
 		
@@ -108,7 +118,7 @@ public class HolidayProviderStrategyMovableDate implements HolidayProviderStrate
 	 * To get the real day 6:1 cases there is an offset needed.
 	 * @return
 	 */
-	private int getEarliestDay() {
+	private int getEarliestDay(int day) {
 		
 		int subtrahend = 1;
 		
@@ -116,8 +126,7 @@ public class HolidayProviderStrategyMovableDate implements HolidayProviderStrate
 			subtrahend = 2;
 		}
  
-		int earliestDay = (this.dayOfWeek - 1) 
-			+ 7 * (this.occurenceInMonth - subtrahend);
+		int earliestDay = day + 7 * (this.occurenceInMonth - subtrahend);
 		
 	    return earliestDay;
 		
@@ -134,10 +143,6 @@ public class HolidayProviderStrategyMovableDate implements HolidayProviderStrate
 	 * @return
 	 */
 	private int calculateOffset(int monthStartsOnDay, int dayOfWeek) {
-	    
-	    // 'java.util.Calendar' related stuff
-	    monthStartsOnDay -= 1;
-	    dayOfWeek = dayOfWeek - 1;
 
 	    int offset = 0;
 	    
