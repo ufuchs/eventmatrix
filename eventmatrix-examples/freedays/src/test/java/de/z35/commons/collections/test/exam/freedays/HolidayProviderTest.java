@@ -52,7 +52,7 @@ public class HolidayProviderTest {
     @Test
     public void X_010_Test() {
 
-        HolidayProvider itsFHP = new HolidayProvider();
+        HolidayProvider itsFHP = new HolidayProvider(null);
         assertNotNull(itsFHP);
 
     }
@@ -73,7 +73,7 @@ public class HolidayProviderTest {
 
     	int year = 2011;
 
-        HolidayProvider provider = new HolidayProvider();
+        HolidayProvider provider = new HolidayProvider(null);
 
 		Method getDate =
 			HolidayProvider.class.getDeclaredMethod("getDate", int.class, String.class);

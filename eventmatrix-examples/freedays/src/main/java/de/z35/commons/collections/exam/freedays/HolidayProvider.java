@@ -5,6 +5,7 @@
 
 package de.z35.commons.collections.exam.freedays;
 
+import java.util.Calendar;
 import java.util.Vector;
 
 /**
@@ -19,7 +20,17 @@ public class HolidayProvider {
 
     private HolidayProviderStrategyMovableDate strategyMovableDate =
     	new HolidayProviderStrategyMovableDate();
-    
+
+    private ShiftHolidayStrategy shiftedHoliday;
+
+    /**
+     *
+     * @param shiftedHoliday
+     */
+    public HolidayProvider(ShiftHolidayStrategy shiftedHoliday) {
+        this.shiftedHoliday = shiftedHoliday;
+    }
+
 	/**
 	 *
 	 * @return
@@ -32,7 +43,18 @@ public class HolidayProvider {
 
 			String date = getDate(year, template[0]);
 
-			holidays.add(Holiday.createHoliday(date, template[1]));
+			Holiday holiday = Holiday.createHoliday(date, template[1]);
+
+			holidays.add(holiday);
+
+			if (this.shiftedHoliday != null) {
+
+				Holiday shiftedHoliday = this.shiftedHoliday.shiftHoliday(holiday);
+
+				if (shiftedHoliday != null) {
+					holidays.add(shiftedHoliday);
+				}
+			}
 
 		}
 
@@ -61,7 +83,7 @@ public class HolidayProvider {
 
 	/**
 	 * 
-	 * @param isFixed
+	 * @param firstCharOfTemplate
 	 * @return
 	 */
 	private HolidayProviderStrategy getProviderStrategy(char firstCharOfTemplate) {
