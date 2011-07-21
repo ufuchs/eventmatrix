@@ -22,21 +22,33 @@ public class HolidayProviderStrategyMovableDate implements HolidayProviderStrate
 
 	private int year;
 
-	// params from 'dateTemplate'
-
+	/**
+	 * Represents the month of the year minus 1.
+	 * </br>It's the first number in the sequence 'M11.4.5'
+	 * 
+	 */
 	private int month;
 
 	/**
-	 * the number of the occurrence of the target day
+	 * The number of the occurrence of the target day.
+     * </br>It's the second number in the sequence 'M11.4.5'
+     * </br>Be aware! It's not related to the week in month.
+     * If the target day is a Monday but the month starts a week before on
+     * Tuesday then the first occurrence will be in the second week of the
+     * month.
 	 */
 	private int nThOccurenceInMonth;
 
+    /**
+     * Represents the day of the week.
+     * </br>It's the last number in the sequence 'M11.4.5'
+     * </br>It starts with Sunday = 1 and ends with Saturday = 7
+     */
 	private int targetDay;
 
 	/**
 	 *
-	 * @param dateTemplate like 'M2.3.1'
-	 * @return
+	 * @param dateTemplate A string like 'M2.3.1'
 	 */
 	public void setParams(int year, String dateTemplate) {
 
@@ -48,7 +60,7 @@ public class HolidayProviderStrategyMovableDate implements HolidayProviderStrate
 		// splits into single figures, e.g '1.2.0' to {"1","2","0"}
 		String[] parts = template.split("\\.");
 
-		// the first digit represents the month
+		// the first digit represents the month of year minus 1
 		this.month = Integer.parseInt(parts[MONTH]) - 1;
 
 		// the second digit represents the occurrence of the target day
@@ -70,17 +82,24 @@ public class HolidayProviderStrategyMovableDate implements HolidayProviderStrate
 
 		cal.set(Calendar.YEAR, this.year);
 
-		cal.set(Calendar.MONTH,  this.month + ((this.nThOccurenceInMonth <= 0) ? 1 : 0));
+        int corr = 0;
+
+		if (this.nThOccurenceInMonth >= 5) {
+			corr = 1;
+		}
+
+		cal.set(Calendar.MONTH, this.month + corr);
 
 		cal.set(Calendar.DAY_OF_MONTH, 1);
 
-		int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
+		int firstDayInMonth = cal.get(Calendar.DAY_OF_WEEK);
 		
-		int earliestDay = getEarliestDate(targetDay, dayOfWeek, this.nThOccurenceInMonth);
+		int weeks = convertOccurenceToWeeks(this.targetDay, firstDayInMonth, 
+				this.nThOccurenceInMonth);
 
-		int offset = getOffset(targetDay, dayOfWeek);
+		int offset = calcOffset(this.targetDay, firstDayInMonth);
 
-	    cal.add(Calendar.DAY_OF_MONTH, earliestDay + offset);
+	    cal.add(Calendar.DAY_OF_MONTH, weeks * 7 + offset);
 
 		return DateTimeUtils.calToString(cal);
 
@@ -89,20 +108,24 @@ public class HolidayProviderStrategyMovableDate implements HolidayProviderStrate
 	/**
 	 *
 	 * @param targetDay
-	 * @param weekDay
+	 * @param firstDayInMonth
 	 * @return
 	 */
-	private int getEarliestDate(int targetDay, int weekDay, int nThOccurence) {
+	private int convertOccurenceToWeeks(int targetDay, int firstDayInMonth, int nThOccurence) {
 
-       if (targetDay >= weekDay) {
+        if (nThOccurence >= 5) {
+            nThOccurence = 0;
+        }
 
-	       	// If the day of week is greater or equal than the number of the day
-	       	// the month starts with subtract one week.
+       if (targetDay >= firstDayInMonth) {
+
+	       	// If the target day is greater or equal than the number of the day
+	       	// the month starts with then subtract one week.
 	       	nThOccurence -= 1;
 
        }
 
-       return (7 * nThOccurence);
+       return nThOccurence;
 
 	}
 
@@ -116,8 +139,9 @@ public class HolidayProviderStrategyMovableDate implements HolidayProviderStrate
 	 * @param targetDay
 	 * @return
 	 */
-	private int getOffset(int targetDay, int weekDay) {
+	private int calcOffset(int targetDay, int weekDay) {
 
+		// Sorry, melted down.
 		return targetDay - weekDay;
 
 	}

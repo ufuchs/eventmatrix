@@ -92,7 +92,7 @@ public class HolidayProviderStrategyMovableDateTest {
 
 		HolidayProviderStrategyMovableDate strategy = new HolidayProviderStrategyMovableDate();
 
-		strategy.setParams(year, "M5.0.2");
+		strategy.setParams(year, "M5.5.2");
 
 		// 2001-JUL-20 'transformTemplate' is now public.
 		Method specifyStrategy =
