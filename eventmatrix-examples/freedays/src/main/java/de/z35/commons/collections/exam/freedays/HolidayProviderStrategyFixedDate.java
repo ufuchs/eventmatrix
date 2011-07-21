@@ -35,5 +35,4 @@ public class HolidayProviderStrategyFixedDate implements HolidayProviderStrategy
 				
 	}
 
-
 }

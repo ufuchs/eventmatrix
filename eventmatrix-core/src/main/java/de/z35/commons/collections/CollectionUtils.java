@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2011 Uli Fuchs <ufuchs@gmx.com>
+ * Released under the terms of the GNU GPL v2.0.
+ */
+
 package de.z35.commons.collections;
 
 import java.util.Collection;
@@ -7,19 +12,19 @@ import de.z35.commons.collections.Predicate;
 
 /*
  * This IS and WILL NOT BE any substitute against the famous apache.commons.collections - framework
- * Only a lightweight implementation for a special purpose inspired from. 
+ * Only a lightweight implementation for a special purpose inspired from.
  */
 public class CollectionUtils {
 
 	/**
-	 * 
+	 *
 	 * @param <To>
 	 * @param from
 	 * @param transformer
 	 * @return
 	 */
 	public static synchronized <From,To> Collection<To> transform(Collection<From> from, Transformer<From,To> transformer) {
-		
+
 		Collection<To> result = new Vector<To>();
 
         for (From f : from) {
@@ -27,11 +32,11 @@ public class CollectionUtils {
             result.add(transformer.transform(f));
 
         }
-		
+
 		return result;
 
 	}
-	
+
 	/**
 	 * Selects all elements from input collection which match the given predicate into an output collection.
 	 * @param <T>
@@ -44,7 +49,7 @@ public class CollectionUtils {
 	public static synchronized <T> Collection<T> select(Collection<T> c, Predicate<T> p) {
 
 		Collection<T> result = new Vector<T>();
-		
+
 		Iterator<T> it = c.iterator();
 
 		while (it.hasNext()) {
@@ -56,9 +61,9 @@ public class CollectionUtils {
 			}
 
 		}
-		
+
 		return result;
-		
+
 	}
 
 	/**
@@ -79,9 +84,9 @@ public class CollectionUtils {
             }
 
         }
-		
+
 		return result;
-		
+
 	}
-	
+
 }

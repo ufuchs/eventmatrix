@@ -1,9 +1,19 @@
+/*
+ * Copyright (c) 2011 Uli Fuchs <ufuchs@gmx.com>
+ * Released under the terms of the GNU GPL v2.0.
+ */
+
 package de.z35.commons.collections.exam.freedays;
 
 import de.z35.commons.collections.Transformer;
 import de.z35.commons.collections.exam.freedays.EasterTideProvider.DayOfTide;
 import de.z35.commons.collections.exam.freedays.EasterTideProvider.EasterTide;
 
+/**
+ * 
+ * @author ufuchs
+ *
+ */
 public class EasterTideTransformer implements Transformer<DayOfTide, Holiday> {
 
 	/**
