@@ -72,6 +72,11 @@ public class FreeDays {
 	 */
 	public static void main(String[] args) {
 
+		CliOptionProvider op = new CliOptionProvider();
+		op.populateOptions(OPTION_DESCS);
+		
+		System.out.print("test");
+		
 	}
 
 }
