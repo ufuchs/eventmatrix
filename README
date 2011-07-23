@@ -3,8 +3,18 @@ First : Don't be confused by the project name.
 Originally planned to use for time related events, now it becomes more and more 
 a general purpose solution.
 
+(Maybe it will be renamed at some time or another to 'frugal.collections' or so. Caused by its simplicity.)
+
+Okay.
+
 To keep the scope, in the 'eventmatrix-example' project you will find demo 
 applications which use this bundle of classes for time related events.
+
+The first demo is 'Freeday'. (Not completed yet. I'm working on.)
+
+    - It will calculate your free days (off from business) during a year period.
+
+    - So you can make plans to increase this time.
 
 Best regards, Uli
 

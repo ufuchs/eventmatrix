@@ -8,28 +8,14 @@ package de.z35.commons.collections.exam.freedays;
 public class FreeDays {
 
 	/**
-	 * command line options
-	 */
-	private static Object[][] FREEDAY_CLI_OPTIONS = new Object[][] {
-		
-		{ "p", "public", false, "lists the public holidays in your country" },
-		{ "w", "weekend", false, "lists the weekends" },
-
-	};
-
-	 enum FreeDayOptions {
-		PUBLIC_HOLIDAY,
-		WEEKEND
-	}
-
-
-	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
 
 		OptionProvider op = new OptionProvider();
-		op.populateOptions(FREEDAY_CLI_OPTIONS);
+		op.populateOptions(FreeDayCliOption.OPTIONS_DESC);
+
+
 		
 		System.out.print("test");
 		
