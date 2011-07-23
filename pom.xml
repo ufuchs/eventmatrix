@@ -6,115 +6,127 @@
   -->
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-	<groupId>de.z35.commons</groupId>
-	<version>0.1</version>
-	<artifactId>eventmatrix</artifactId>
-	<packaging>pom</packaging>
+    <groupId>de.z35.commons</groupId>
+    <version>0.1</version>
+    <artifactId>eventmatrix</artifactId>
+    <packaging>pom</packaging>
 
-	<name>eventmatrix</name>
-	<inceptionYear>2011</inceptionYear>
+    <name>eventmatrix</name>
+    <inceptionYear>2011</inceptionYear>
 
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	</properties>
-
-
-	<build>
-		<plugins>
-
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>2.3.2</version>
-				<configuration>
-					<fork>true</fork>
-					<meminitial>128m</meminitial>
-					<maxmem>512m</maxmem>
-				 <source>1.6</source>
-				 <target>1.6</target>
-				</configuration>
-			</plugin>
-
-			<plugin>
-				<artifactId>maven-clean-plugin</artifactId>
-				<version>2.4.1</version>
-
-<!--
-				<executions>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
 
 
-					<execution>
-						<id>auto-clean</id>
-						<phase>initialize</phase>
-						<goals>
-							<goal>clean</goal>
-						</goals>
-					</execution>
+    <build>
+        <plugins>
 
-				</executions>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.2</version>
+                <configuration>
+                    <fork>true</fork>
+                    <meminitial>128m</meminitial>
+                    <maxmem>512m</maxmem>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>2.4.1</version>
+
+                <!--
+                <executions>
+
+
+                    <execution>
+                        <id>auto-clean</id>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>clean</goal>
+                        </goals>
+                    </execution>
+
+                </executions>
 -->
-				<configuration>
+                <configuration>
 
-					<filesets>
-						<fileset>
-							<directory>test-output</directory>
-							<includes>
-								<include>**/*.*</include>
-							</includes>
-							<followSymlinks>false</followSymlinks>
-						</fileset>
-					</filesets>
-				</configuration>
+                    <filesets>
+                        <fileset>
+                            <directory>test-output</directory>
+                            <includes>
+                                <include>**/*.*</include>
+                            </includes>
+                            <followSymlinks>false</followSymlinks>
+                        </fileset>
+                    </filesets>
+                </configuration>
 
-			</plugin>
+            </plugin>
 
-		</plugins>
+        </plugins>
 
-		<pluginManagement>
-			<plugins>
-				<plugin>
-					<groupId>com.pyx4me</groupId>
-					<artifactId>proguard-maven-plugin</artifactId>
-					<version>2.0.4</version>
-				</plugin>
-			</plugins>
-		</pluginManagement>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>com.pyx4me</groupId>
+                    <artifactId>proguard-maven-plugin</artifactId>
+                    <version>2.0.4</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
 
-	</build>
+    </build>
 
-	<dependencies>
+    <dependencies>
 
-	<!--
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>3.8.1</version>
-			<scope>test</scope>
-		</dependency>
- 	-->
-		<dependency>
-			<groupId>org.testng</groupId>
-			<artifactId>testng</artifactId>
-			<version>5.14</version>
-			<scope>test</scope>
-		</dependency>
+        <!--
+                <dependency>
+                    <groupId>junit</groupId>
+                    <artifactId>junit</artifactId>
+                    <version>3.8.1</version>
+                    <scope>test</scope>
+                </dependency>
+             -->
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>5.14</version>
+            <scope>test</scope>
+        </dependency>
 
-		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>1.2.16</version>
-		</dependency>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.16</version>
+        </dependency>
 
-	</dependencies>
+    </dependencies>
 
-	<modules>
-		<module>eventmatrix-core</module>
+    <modules>
+        <module>eventmatrix-core</module>
 
-		<module>eventmatrix-examples</module>
+        <module>eventmatrix-examples</module>
 
-	</modules>
+    </modules>
+
+    <contributor>
+        <name>Norbert Teage</name>
+        <email>info@taege-berlin.de</email>
+        <url>www.taege-berlin.de</url>
+        <organization>AUCOTEAM GmbH, GERMANY</organization>
+        <organizationUrl>www.aucoteam.de</organizationUrl>
+        <roles>
+            <role>consultant</role>
+        </roles>
+        <timezone>+1</timezone>
+    </contributor>
 
 </project>
