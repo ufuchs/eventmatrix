@@ -116,17 +116,19 @@
         <module>eventmatrix-examples</module>
 
     </modules>
+    <contributors>
 
-    <contributor>
-        <name>Norbert Teage</name>
-        <email>info@taege-berlin.de</email>
-        <url>www.taege-berlin.de</url>
-        <organization>AUCOTEAM GmbH, GERMANY</organization>
-        <organizationUrl>www.aucoteam.de</organizationUrl>
-        <roles>
-            <role>consultant</role>
-        </roles>
-        <timezone>+1</timezone>
-    </contributor>
+        <contributor>
+            <name>Norbert Teage</name>
+            <email>info@taege-berlin.de</email>
+            <url>www.taege-berlin.de</url>
+            <organization>AUCOTEAM GmbH, GERMANY</organization>
+            <organizationUrl>www.aucoteam.de</organizationUrl>
+            <roles>
+                <role>consultant</role>
+            </roles>
+            <timezone>+1</timezone>
+        </contributor>
+    </contributors>
 
 </project>
