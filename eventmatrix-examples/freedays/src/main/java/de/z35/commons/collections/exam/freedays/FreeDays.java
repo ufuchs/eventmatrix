@@ -5,75 +5,31 @@
 
 package de.z35.commons.collections.exam.freedays;
 
-import org.apache.commons.cli.Options;
-
 public class FreeDays {
 
-	private static int O_OPT = 0;
-	private static int O_LONGOPT = 1;
-	private static int O_HASARG = 2;
-	private static int O_DESC = 3;
-	
 	/**
 	 * command line options
 	 */
-	private static Object[][] OPTION_DESCS = new Object[][] {
+	private static Object[][] FREEDAY_CLI_OPTIONS = new Object[][] {
 		
-		{ "a", "all", false, "do not hide entries starting with ." },
-		{ "A", "almost-all", false, "do not list implied . and .." } 
-		
+		{ "p", "public", false, "lists the public holidays in your country" },
+		{ "w", "weekend", false, "lists the weekends" },
+
 	};
-	
-	/**
-	 * 
-	 * @author ufuchs
-	 *
-	 */
-	public static class CliOptionProvider {
-		
-		private Options options = new Options();
-		
-		/**
-		 * 
-		 * @param options
-		 */
-		public void populateOptions(Object[][] optionsDescs) {
-			
-			for (Object[] optionDesc : optionsDescs) {
-				
-				String opt = (String) optionDesc[O_OPT];
-				String longOpt = (String) optionDesc[O_LONGOPT];
-				boolean hasArg = (Boolean) optionDesc[O_HASARG];
-				String desc = (String) optionDesc[O_DESC];
-				
-				if ("".equals(longOpt)) {
-					options.addOption(opt, hasArg, desc);
-				} else {
-					options.addOption(opt, longOpt, hasArg, desc);
-				}
-				
-			}
-			
-		}
-		
+
+	 enum FreeDayOptions {
+		PUBLIC_HOLIDAY,
+		WEEKEND
 	}
-	
-	/**
-	 * 
-	 * @author ufuchs
-	 *
-	 */
-	public static class FreeDayOptions {
-		
-	}
-	
+
+
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
 
-		CliOptionProvider op = new CliOptionProvider();
-		op.populateOptions(OPTION_DESCS);
+		OptionProvider op = new OptionProvider();
+		op.populateOptions(FREEDAY_CLI_OPTIONS);
 		
 		System.out.print("test");
 		
