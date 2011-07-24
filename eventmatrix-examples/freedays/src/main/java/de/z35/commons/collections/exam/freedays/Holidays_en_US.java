@@ -1,4 +1,4 @@
-package de.z35.commons.collections.test.exam.freedays;
+package de.z35.commons.collections.exam.freedays;
 
 public class Holidays_en_US {
 	/**

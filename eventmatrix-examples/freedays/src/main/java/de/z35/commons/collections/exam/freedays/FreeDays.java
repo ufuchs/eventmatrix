@@ -5,6 +5,8 @@
 
 package de.z35.commons.collections.exam.freedays;
 
+import java.util.Vector;
+
 import de.z35.frugal.cli.CliOptionService;
 
 public class FreeDays {
@@ -21,7 +23,11 @@ public class FreeDays {
 		
 		HolidayProvider provider = new HolidayProvider(null);
 
-		provider.getHolidays(null, 2011);
+		Vector<Holiday> holidays = provider.getHolidays(Holidays_en_US.HOLIDAYS_en_US, 2011);
+		
+		for (Holiday holiday : holidays) {
+			System.out.print(holiday.toString());
+		}
 		
 	}
 

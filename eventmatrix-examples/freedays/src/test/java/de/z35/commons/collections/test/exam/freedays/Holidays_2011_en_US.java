@@ -13,7 +13,7 @@ package de.z35.commons.collections.test.exam.freedays;
  * Time: 18:19
  * To change this template use File | Settings | File Templates.
  */
-public class Holidays_2011_en_US_ {
+public class Holidays_2011_en_US {
 
 	// the first day is SUNDAY corresponding to day number 1  
     public static Object[][] HOLIDAYS_2011_en_US = new Object[][] {
