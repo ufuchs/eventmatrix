@@ -5,6 +5,8 @@
 
 package de.z35.commons.collections.exam.freedays;
 
+import de.z35.frugal.cli.CliOptionService;
+
 public class FreeDays {
 
 	/**
@@ -12,12 +14,14 @@ public class FreeDays {
 	 */
 	public static void main(String[] args) {
 
-		OptionProvider op = new OptionProvider();
-		op.populateOptions(FreeDayCliOption.OPTIONS_DESC);
-
+		CliOptionService cos = new CliOptionService()
+				.withArgs(args)
+				.withOptions(FreeDayCliOption.OPTIONS_DESC);
 
 		
-		System.out.print("test");
+		HolidayProvider provider = new HolidayProvider(null);
+
+		provider.getHolidays(null, 2011);
 		
 	}
 

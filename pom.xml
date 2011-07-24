@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
   ~ Copyright (c) 2011. Uli Fuchs <ufuchs@gmx.com>
-  ~ All rights reserved.
   ~ Released under the terms of the GNU GPL v2.0.
   -->
 
@@ -17,10 +16,24 @@
     <name>eventmatrix</name>
     <inceptionYear>2011</inceptionYear>
 
+    <contributors>
+
+        <contributor>
+            <name>Norbert Taege</name>
+            <email>info@taege-berlin.de</email>
+            <url>www.taege-berlin.de</url>
+            <organization>AUCOTEAM GmbH, GERMANY</organization>
+            <roles>
+                <role>consultant</role>
+            </roles>
+            <timezone>+1</timezone>
+        </contributor>
+
+    </contributors>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-
 
     <build>
         <plugins>
@@ -87,14 +100,6 @@
 
     <dependencies>
 
-        <!--
-                <dependency>
-                    <groupId>junit</groupId>
-                    <artifactId>junit</artifactId>
-                    <version>3.8.1</version>
-                    <scope>test</scope>
-                </dependency>
-             -->
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
@@ -111,24 +116,10 @@
     </dependencies>
 
     <modules>
-        <module>eventmatrix-core</module>
 
+        <module>eventmatrix-core</module>
         <module>eventmatrix-examples</module>
 
     </modules>
-    <contributors>
-
-        <contributor>
-            <name>Norbert Teage</name>
-            <email>info@taege-berlin.de</email>
-            <url>www.taege-berlin.de</url>
-            <organization>AUCOTEAM GmbH, GERMANY</organization>
-            <organizationUrl>www.aucoteam.de</organizationUrl>
-            <roles>
-                <role>consultant</role>
-            </roles>
-            <timezone>+1</timezone>
-        </contributor>
-    </contributors>
 
 </project>

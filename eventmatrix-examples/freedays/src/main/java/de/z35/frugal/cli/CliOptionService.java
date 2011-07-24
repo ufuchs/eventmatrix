@@ -1,11 +1,12 @@
 /*
  * Copyright (c) 2011. Uli Fuchs <ufuchs@gmx.com>
- * All rights reserved.
  * Released under the terms of the GNU GPL v2.0.
  */
 
 package de.z35.frugal.cli;
 
+import de.z35.commons.collections.exam.freedays.FreeDayCliOption;
+import de.z35.commons.collections.exam.freedays.OptionProvider;
 import org.apache.commons.cli.*;
 
 /**
@@ -17,26 +18,56 @@ import org.apache.commons.cli.*;
  */
 public class CliOptionService {
 
-	CommandLineParser parser = new PosixParser();
+	private String[] args;
 
-	public String[] args;
+	private Options options;
 
-	Options options;
+	private CommandLine cmd;
 
-
+	/**
+	 *
+	 * @param args
+	 * @return
+	 */
 	public CliOptionService withArgs(String[] args) {
 		this.args = args;
 		return  this;
 	}
 
-	public CliOptionService withOptions(Options options) {
-		this.options = options;
+	/**
+	 *
+	 * @param descriptor
+	 * @return
+	 */
+	public CliOptionService withOptions(Object[][] descriptor) {
+
+		this.options = this.populateOptions(descriptor);
 		return this;
+
 	}
 
+	/**
+	 *
+	 * @param descriptor
+	 */
+	private Options populateOptions(Object[][] descriptor) {
 
+		OptionProvider op = new OptionProvider();
+		op.populateOptions(descriptor);
+
+		return op.getOptions();
+
+	}
+
+	/**
+	 *
+	 * @throws ParseException
+	 */
 	public void parse() throws ParseException {
-		CommandLine cmd = parser.parse( options, args);
+
+		CommandLineParser parser = new PosixParser();
+
+		this.cmd = parser.parse(this.options, this.args);
 
 	}
 

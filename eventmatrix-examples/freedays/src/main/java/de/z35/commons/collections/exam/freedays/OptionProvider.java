@@ -14,14 +14,14 @@ public class OptionProvider {
 	static int O_HASARG = 2;
 	static int O_DESC = 3;
 
-	private Options options = new Options();
+	protected Options options = new Options();
 
 	/**
 	 *
 	 * @return
 	 */
 	public Options getOptions() {
-		return  this.options;
+		return this.options;
 	}
 
 	/**
@@ -46,5 +46,10 @@ public class OptionProvider {
 
 	}
 
+	/**
+	 * Add more complex options which couldn't be handled by standard manner
+	 */
+	private void addExtraOptions() {
 
+	}
 }
