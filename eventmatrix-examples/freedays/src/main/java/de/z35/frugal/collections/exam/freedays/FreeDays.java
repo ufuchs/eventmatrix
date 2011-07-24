@@ -20,8 +20,7 @@ public class FreeDays {
 				.withArgs(args)
 				.withOptions(FreeDayCliOption.OPTIONS_DESC);
 
-		
-		HolidayProvider provider = new HolidayProvider(null);
+		HolidayProvider provider = new HolidayProvider(new ShiftHolidayStrategy_en_US());
 
 		Vector<Holiday> holidays = provider.getHolidays(Holidays_en_US.HOLIDAYS_en_US, 2011);
 		
