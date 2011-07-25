@@ -39,6 +39,16 @@ public class Holiday {
 	private String name;
 	private boolean onWeekEnd;
 
+	private Calendar shiftedFrom;
+
+	public Calendar getShiftedFrom() {
+		return shiftedFrom;
+	}
+
+	public void setShiftedFrom(Calendar shiftedFrom) {
+		this.shiftedFrom = shiftedFrom;
+	}
+
 	public boolean isOnWeekEnd() {
 		return onWeekEnd;
 	}

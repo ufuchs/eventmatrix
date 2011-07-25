@@ -5,7 +5,6 @@
 
 package de.z35.frugal.collections.exam.freedays;
 
-import java.util.Calendar;
 import java.util.Vector;
 
 /**
@@ -21,14 +20,14 @@ public class HolidayProvider {
     private HolidayProviderStrategyMovableDate strategyMovableDate =
     	new HolidayProviderStrategyMovableDate();
 
-    private ShiftHolidayStrategy shiftedHoliday;
+    private ShiftHolidayStrategy shiftingStrategy;
 
     /**
      *
-     * @param shiftedHoliday
+     * @param shiftingStrategy
      */
-    public HolidayProvider(ShiftHolidayStrategy shiftedHoliday) {
-        this.shiftedHoliday = shiftedHoliday;
+    public HolidayProvider(ShiftHolidayStrategy shiftingStrategy) {
+        this.shiftingStrategy = shiftingStrategy;
     }
 
 	/**
@@ -47,13 +46,10 @@ public class HolidayProvider {
 
 			holidays.add(holiday);
 
-			if (this.shiftedHoliday != null) {
+			if (this.shiftingStrategy != null) {
 
-				Holiday shiftedHoliday = this.shiftedHoliday.shiftHoliday(holiday);
+				this.shiftingStrategy.shiftHoliday(holiday);
 
-				if (shiftedHoliday != null) {
-					holidays.add(shiftedHoliday);
-				}
 			}
 
 		}

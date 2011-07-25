@@ -16,54 +16,56 @@ import java.util.Calendar;
  */
 public class ShiftHolidayStrategy_en_US implements ShiftHolidayStrategy {
 
-	private static String FRIDAY = "Friday";
-	private static String MONDAY = "Monday";
-
 	/**
-	 * Creates an extra holiday closest to the next weekday.
+	 * Calculates the date of an extra holiday closest to the next weekday.
 	 *
-	 * @param originData The <code>date</code> of the originally holiday.
-	 * @param originName The <code>name</code> of the originally holiday.
-	 * @param shiftUp If <code>true</code> shifts plus one day otherwise minus
-	 * 					one day.
-	 * @return An extra holiday on Friday or on Monday.
+	 * @param originDate The <code>date</code> of the originally holiday.
+	 * @return The date of an extra holiday on Friday or on Monday.
 	 */
-	private Holiday createShifted(Calendar originData, String originName,
-								  boolean shiftUp) {
+	private Calendar calculateShiftedToDate(Calendar originDate) {
 
-		String name = String.format("%s : Shifted to %s", originName,
-				((shiftUp) ? MONDAY : FRIDAY));
+        boolean shiftUp = originDate.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY;
 
-		Calendar date = (Calendar) originData.clone();
+		Calendar shiftedTo = (Calendar) originDate.clone();
 
-		date.roll(Calendar.DATE, shiftUp);
+		if ((!shiftUp)
+				&& shiftedTo.get(Calendar.MONTH) == Calendar.JANUARY
+				&& shiftedTo.get(Calendar.DAY_OF_MONTH) == 1) {
 
-		return Holiday.createHoliday(date, name);
+			shiftedTo.roll(Calendar.YEAR, false);
+			shiftedTo.roll(Calendar.MONTH, false);
+		}
+
+		shiftedTo.roll(Calendar.DAY_OF_MONTH, shiftUp);
+
+		return shiftedTo;
 
 	}
 
 	/**
-	 * If a holiday falls on a weekend, an extra day close to the nearest
-	 * weekday will be created.
+	 * If a holiday falls on a weekend, the date of an extra day close to the
+	 * nearest weekday will be created.
 	 *
-	 * @param origin The originally holiday
-	 * @return A new holiday if <code>origin</code> falls on a weekend otherwise
-	 * 			null
+	 * @param holiday The originally holiday
+	 * @return The same holiday with an alternative date in
+	 * 			<code>shiftedTo</code>. Null if there isn't a holiday which
+	 * 			falls on a weekend.
+	 *
 	 */
 	@Override
-	public Holiday shiftHoliday(Holiday origin) {
+	public Holiday shiftHoliday(Holiday holiday) {
 
-		if (!origin.isOnWeekEnd()) {
-			return null;
+		if (!holiday.isOnWeekEnd()) {
+			return holiday;
 		}
 
-		Calendar date = origin.getDate();
+		Calendar shiftedTo = calculateShiftedToDate(holiday.getDate());
 
-		String name = origin.getName();
+		holiday.setShiftedFrom(holiday.getDate());
 
-		boolean shiftUp = date.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY;
+		holiday.setDate(shiftedTo);
 
-		return createShifted(date, name, shiftUp);
+		return holiday;
 
 	}
 
