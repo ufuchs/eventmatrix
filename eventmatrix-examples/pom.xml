@@ -1,33 +1,58 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
 
-  <parent>
-    <artifactId>eventmatrix</artifactId>
-    <groupId>de.z35.commons</groupId>
-    <version>0.1</version>
-  </parent>
+	<parent>
+		<artifactId>eventmatrix</artifactId>
+		<groupId>de.z35.commons</groupId>
+		<version>0.1</version>
+	</parent>
 
-  <groupId>de.z35.commons</groupId>
-  <artifactId>eventmatrix-examples</artifactId>
-  <version>0.1</version>
-  <packaging>pom</packaging>
-  <name>eventmatrix-examples</name>
-  <description>The EventMatrix in use</description>
+	<groupId>de.z35.commons</groupId>
+	<artifactId>eventmatrix-examples</artifactId>
+	<version>0.1</version>
+	<packaging>pom</packaging>
+	<name>eventmatrix-examples</name>
+	<description>The EventMatrix in use</description>
 
-  <dependencyManagement>
-  	<dependencies>
-  		<dependency>
-  			<groupId>de.z35.commons</groupId>
-  			<artifactId>eventmatrix-core</artifactId>
-  			<version>0.1-SNAPSHOT</version>
-  			<type>jar</type>
-  			<scope>compile</scope>
-  		</dependency>
-  	</dependencies>
-  </dependencyManagement>
 
-  <modules>
+	<contributors>
+
+		<contributor>
+			<name>Jan Goyvaerts</name>
+			<url>http://www.regular-expressions.info/about.html</url>
+			<organization>Just Great Software Co. Ltd.</organization>
+			<organizationUrl>http://www.just-great-software.com
+			</organizationUrl>
+			<roles>
+				<role>regex guru</role>
+			</roles>
+			<timezone>+7</timezone>
+			<properties>
+				<blog>http://www.regexguru.com/</blog>
+				<book>Regular Expressions Cookbook</book>
+				<amazon>http://tinyurl.com/3eyn5up</amazon>
+			</properties>
+		</contributor>
+
+	</contributors>
+
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>de.z35.commons</groupId>
+				<artifactId>eventmatrix-core</artifactId>
+				<version>0.1-SNAPSHOT</version>
+				<type>jar</type>
+				<scope>compile</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<modules>
 		<module>freedays</module>
-  </modules>
+	</modules>
 
 </project>

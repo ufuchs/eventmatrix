@@ -12,18 +12,30 @@ import de.z35.frugal.cli.CliOptionService;
 
 public class FreeDays {
 
+	public static FreeDays freedays;
+
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
 
+		freedays = new FreeDays();
+
 		CliOptionService cos = new CliOptionService()
 				.withArgs(args)
 				.withOptions(FreeDayCliOption.OPTIONS_DESC);
 
-		HolidayProvider provider = new HolidayProvider(new ShiftHolidayStrategy_en_US());
+		// /////////////////////////////////////////////////////////////////////
 
-		Vector<Holiday> holidays = provider.getHolidays(Holidays_en_US.HOLIDAYS_en_US, 2012);
+		String yearOption = "2.2010-10.2011";
+
+		OptionYearValidator oyv = new OptionYearValidator();
+
+		oyv.validate(yearOption);
+
+		// /////////////////////////////////////////////////////////////////////
+
+		Vector<Holiday> holidays = getHolidays(2011);
 
 		FreeDaysMvc mvc = new FreeDaysMvc(DateFormat.FULL);
 
@@ -58,11 +70,38 @@ public class FreeDays {
 					.append(" | ")
 					.append(shiftedFrom);
 
-
-			//System.out.println(name + " | " + date + " | " + shiftedFrom);
 			System.out.println(sb.toString());
 
 		}
+
+	}
+
+	/**
+	 *
+	 * @param date
+	 * @see  http://www.regular-expressions.info/regexbuddy/dateyyyymmdd.html
+	 * @see  http://www.regexplanet.com/simple/
+	 */
+	private static void splitDate(String date) {
+
+
+		String regex = "^(0[1-9]|1[012])[. /.](19|20)\\d\\d[- /.](0[1-9]|1[012])[. /.](19|20)\\d\\d$";
+		// ^(19|20)\d\d$  ==>2011
+		// ^(0[1-9]|1[012])[. /.](19|20)\d\d$ ==>10.2011
+
+	}
+
+	private static Vector<Holiday> getHolidays(int year) {
+
+		HolidayProvider provider = new HolidayProvider(new ShiftHolidayStrategy_en_US());
+
+		return getHolidays(provider, year);
+
+	}
+
+	private static Vector<Holiday> getHolidays(HolidayProvider provider, int year) {
+
+		return provider.getHolidays(Holidays_en_US.HOLIDAYS_en_US, year);
 
 	}
 
