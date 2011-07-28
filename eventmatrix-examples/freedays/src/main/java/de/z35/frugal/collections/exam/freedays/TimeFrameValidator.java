@@ -13,16 +13,46 @@ package de.z35.frugal.collections.exam.freedays;
  * Date: 27/07/11
  * Time: 22:52
  * To change this template use File | Settings | File Templates.
+ *
+ * design issues:
+ * MMXI-07-28 z35	if someday a validation against DD.MM.YYYY is necessary
+ * 					please introduce a strategy pattern.
  */
 public class TimeFrameValidator {
 
+	public enum KindOfTimeFrame {
+		NOTHING,
+		YY,
+		YYMM,
+		YYMM_YYMM
+	}
+
 	private static String YEAR_ONLY = "^(\\d{4})$";
 
-	private static String FORMAL = "^(\\d{1}|\\d{2})[. /.]\\d{4}$";
+	private static String FORMAL_MMYY = "^(\\d{1}|\\d{2})[. /.]\\d{4}$";
 
-	private static String PEDANTIC = "^([1-9]|0[1-9]|1[012])[. /.](19|20)\\d\\d$";
+	private static String PEDANTIC_MMYY = "^([1-9]|0[1-9]|1[012])[. /.](19|20)\\d\\d$";
 
 	private String[] fromTo;
+
+	private KindOfTimeFrame kindOfTimeFrame = KindOfTimeFrame.NOTHING;
+
+	/**
+	 *
+	 * @return
+	 */
+	public String[] getFromTo() {
+		return this.fromTo;
+	}
+
+	/**
+	 *
+	 * @return
+	 */
+	public KindOfTimeFrame getKindOfTimeFrame() {
+		return this.kindOfTimeFrame;
+	}
+
 
 	/**
 	 *
@@ -66,6 +96,7 @@ public class TimeFrameValidator {
 		if (argLen == 4) {
 
 			if (timeFrame.matches(YEAR_ONLY)) {
+				this.kindOfTimeFrame = KindOfTimeFrame.YY;
 				return 0;
 			} else {
 			  	throw new IllegalArgumentException();
@@ -75,10 +106,21 @@ public class TimeFrameValidator {
 
 		this.fromTo = timeFrame.split("-");
 
-		int errPos = this.doValidate(timeFrame, FORMAL);
+		// pure assumption
+		// if an error has occurred 'kindOfTimeFrame' falls back to KindOfTimeFrame.NOTHING
+		switch (this.fromTo.length) {
+			case 1 :
+				this.kindOfTimeFrame = KindOfTimeFrame.YYMM;
+				break;
+			case 2 :
+				this.kindOfTimeFrame = KindOfTimeFrame.YYMM_YYMM;
+				break;
+		}
+
+		int errPos = this.doValidate(timeFrame, FORMAL_MMYY);
 		checkErr(errPos);
 
-		errPos = this.doValidate(timeFrame, PEDANTIC);
+		errPos = this.doValidate(timeFrame, PEDANTIC_MMYY);
 		checkErr(errPos);
 		// check 'year' option
 
@@ -93,6 +135,8 @@ public class TimeFrameValidator {
 	private void checkErr(int errPos) {
 
 		if (errPos != 0) {
+
+			this.kindOfTimeFrame = KindOfTimeFrame.NOTHING;
 
 			String date;
 			String pattern;
