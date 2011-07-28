@@ -16,22 +16,28 @@ package de.z35.frugal.collections.exam.freedays;
  */
 public class TimeFrameValidator {
 
+	private static String YEAR_ONLY = "^(\\d{4})$";
+
+	private static String FORMAL = "^(\\d{1}|\\d{2})[. /.]\\d{4}$";
+
+	private static String PEDANTIC = "^([1-9]|0[1-9]|1[012])[. /.](19|20)\\d\\d$";
+
 	private String[] fromTo;
 
 	/**
 	 *
+	 * @param timeFrame
+	 * @param pattern
 	 * @return
 	 */
-	private int validateFormal(String yearOption) {
+	private int doValidate(String timeFrame, String pattern) {
 
 		int errPos = 0;
-
-		this.fromTo = yearOption.split("-");
 
 		for (int i = 0; i < this.fromTo.length; i++) {
 
 			// should match '10.2011'
-			if (!fromTo[i].matches("^(\\d{1}|\\d{2})[. /.]\\d{4}")) {
+			if (!fromTo[i].matches(pattern)) {
 				errPos = i + 1;
 			}
 
@@ -43,41 +49,36 @@ public class TimeFrameValidator {
 
 	/**
 	 *
+	 * @param timeFrame
 	 * @return
 	 */
-	private int validatePedantic(String yearOption) {
+	public int validate(String timeFrame) {
 
-		int errPos = 0;
+		int argLen = timeFrame.length();
 
-		for (int i = 0; i < this.fromTo.length; i++) {
+		if (argLen < 4) {
 
-			// should match for
-			// - 1.2011
-			// - 01.2011
-			// - 10.2010
-			if (!this.fromTo[i].matches("^([1-9]|0[1-9]|1[012])[. /.](19|20)\\d\\d$")) {
-				errPos = i + 1;
+			String msg = String.format("argument \'%s\' to short.");
+			throw new IllegalArgumentException(msg);
+
+		}
+
+		if (argLen == 4) {
+
+			if (timeFrame.matches(YEAR_ONLY)) {
+				return 0;
+			} else {
+			  	throw new IllegalArgumentException();
 			}
 
 		}
 
-		return errPos;
+		this.fromTo = timeFrame.split("-");
 
-	}
-
-	/**
-	 *
-	 * @param yearOption
-	 * @return
-	 */
-	public int validate(String yearOption) {
-
-		this.fromTo = yearOption.split("-");
-
-		int errPos = this.validateFormal(yearOption);
+		int errPos = this.doValidate(timeFrame, FORMAL);
 		checkErr(errPos);
 
-		errPos = validatePedantic(yearOption);
+		errPos = this.doValidate(timeFrame, PEDANTIC);
 		checkErr(errPos);
 		// check 'year' option
 
@@ -85,8 +86,12 @@ public class TimeFrameValidator {
 
 	}
 
+	/**
+	 *
+	 * @param errPos
+	 */
 	private void checkErr(int errPos) {
-		// check 'year' option
+
 		if (errPos != 0) {
 
 			String date;
@@ -105,8 +110,9 @@ public class TimeFrameValidator {
 			String msg = String.format(format, this.fromTo[errPos-1]);
 
 			throw new IllegalArgumentException(msg);
-		}
-	}
 
+		}
+
+	}
 
 }
