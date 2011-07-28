@@ -29,7 +29,7 @@ public class FreeDays {
 
 		String yearOption = "2.2010-10.2011";
 
-		OptionYearValidator oyv = new OptionYearValidator();
+		TimeFrameValidator oyv = new TimeFrameValidator();
 
 		oyv.validate(yearOption);
 

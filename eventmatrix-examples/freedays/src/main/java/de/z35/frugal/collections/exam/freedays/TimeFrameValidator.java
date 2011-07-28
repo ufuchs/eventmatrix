@@ -14,7 +14,7 @@ package de.z35.frugal.collections.exam.freedays;
  * Time: 22:52
  * To change this template use File | Settings | File Templates.
  */
-public class OptionYearValidator {
+public class TimeFrameValidator {
 
 	private String[] fromTo;
 
