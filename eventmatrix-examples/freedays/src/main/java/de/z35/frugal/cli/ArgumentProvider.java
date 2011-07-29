@@ -14,15 +14,17 @@ import java.util.HashMap;
  * Time: 20:25
  * To change this template use File | Settings | File Templates.
  */
-public class ArgumentProvider {
+public class ArgumentProvider<T> {
 
 	// /////////////////////////////////////////////////////////////////////////
 	// fields
 	// /////////////////////////////////////////////////////////////////////////
 
-	private HashMap<String, String> params = new HashMap<String, String>();
+	private T apiArgument;
 
 	private ArgumentValidator validator;
+
+	private ArgumentExpander<T> expander;
 
 	// /////////////////////////////////////////////////////////////////////////
 	// ctor
@@ -30,16 +32,28 @@ public class ArgumentProvider {
 
 	/**
 	 *
+	 */
+	public ArgumentProvider() {}
+
+	// /////////////////////////////////////////////////////////////////////////
+	// setters
+	// /////////////////////////////////////////////////////////////////////////
+
+	/**
+	 *
 	 * @param validator
 	 */
-	public ArgumentProvider(ArgumentValidator validator) {
+	public void setValidator(ArgumentValidator validator) {
 		this.validator = validator;
 	}
 
 	/**
 	 *
+	 * @param expander
 	 */
-	public ArgumentProvider() {}
+	public void setExpander(ArgumentExpander<T> expander) {
+		this.expander = expander;
+	}
 
 	// /////////////////////////////////////////////////////////////////////////
 	// production
@@ -52,8 +66,20 @@ public class ArgumentProvider {
 	 */
 	public void process(String argument) throws IllegalArgumentException {
 
+		if (argument == null) {
+			throw new IllegalArgumentException("argument can't be null.");
+		}
+
+		if ("".equals(argument)) {
+			throw new IllegalArgumentException("argument can't be empty.");
+		}
+
 		if (this.validator != null) {
 			this.validator.validate((argument));
+		}
+
+		if (this.expander != null) {
+			this.apiArgument = this.expander.expand(argument, null);
 		}
 
 	}

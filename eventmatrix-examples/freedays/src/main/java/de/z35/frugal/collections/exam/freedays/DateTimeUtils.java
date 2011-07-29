@@ -20,7 +20,7 @@ import java.util.Vector;
  */
 public class DateTimeUtils {
 
-	public static String DATE_FORMAT = "yyyy-MM-dd";
+	private static String DATE_FORMAT = "yyyy-MM-dd";
 	
 	/**
 	 *
