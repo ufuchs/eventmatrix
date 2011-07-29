@@ -3,9 +3,7 @@
  * Released under the terms of the GNU GPL v2.0.
  */
 
-package de.z35.frugal.collections.exam.freedays;
-
-import de.z35.frugal.cli.CliOption;
+package de.z35.frugal.cli;
 
 /**
  * Created by IntelliJ IDEA.

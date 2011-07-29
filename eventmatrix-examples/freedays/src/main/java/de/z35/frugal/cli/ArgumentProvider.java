@@ -3,7 +3,7 @@
  * Released under the terms of the GNU GPL v2.0.
  */
 
-package de.z35.frugal.collections.exam.freedays;
+package de.z35.frugal.cli;
 
 import java.util.HashMap;
 
@@ -14,7 +14,7 @@ import java.util.HashMap;
  * Time: 20:25
  * To change this template use File | Settings | File Templates.
  */
-public class OptionValueProvider {
+public class ArgumentProvider {
 
 	// /////////////////////////////////////////////////////////////////////////
 	// fields
@@ -32,14 +32,14 @@ public class OptionValueProvider {
 	 *
 	 * @param validator
 	 */
-	public OptionValueProvider(ArgumentValidator validator) {
+	public ArgumentProvider(ArgumentValidator validator) {
 		this.validator = validator;
 	}
 
 	/**
 	 *
 	 */
-	public OptionValueProvider() {}
+	public ArgumentProvider() {}
 
 	// /////////////////////////////////////////////////////////////////////////
 	// production

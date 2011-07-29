@@ -3,7 +3,9 @@
  * Released under the terms of the GNU GPL v2.0.
  */
 
-package de.z35.frugal.collections.exam.freedays;
+package de.z35.frugal.cli;
+
+import de.z35.frugal.cli.ArgumentValidator;
 
 /**
  * Many thanks to Jan Goyvaerts for his inspirations. See contributors.

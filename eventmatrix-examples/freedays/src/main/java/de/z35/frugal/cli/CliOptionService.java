@@ -5,9 +5,6 @@
 
 package de.z35.frugal.cli;
 
-import de.z35.frugal.collections.exam.freedays.FreeDayCliOption;
-import de.z35.frugal.collections.exam.freedays.OptionProvider;
-
 import org.apache.commons.cli.*;
 
 /**
