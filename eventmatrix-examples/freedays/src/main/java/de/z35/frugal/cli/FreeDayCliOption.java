@@ -19,8 +19,8 @@ public class FreeDayCliOption extends CliOption<FreeDayCliOption.Options>{
 	 */
 	public static Object[][] OPTIONS_DESC = new Object[][] {
 
-		{ "p", "public", false, "lists the public holidays in your country" },
-		{ "w", "weekend", false, "lists the weekends" },
+		{ "y", "year", false, "lists all public holidays in your country" },
+		{ "w", "weekend", false, "lists all weekends" },
 
 	};
 

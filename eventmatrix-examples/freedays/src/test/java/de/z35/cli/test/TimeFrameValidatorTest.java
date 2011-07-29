@@ -3,7 +3,7 @@
  * Released under the terms of the GNU GPL v2.0.
  */
 
-package de.z35.frugal.collections.test.exam.freedays;
+package de.z35.cli.test;
 
 import de.z35.frugal.cli.TimeFrameValidator;
 import org.testng.Assert;
