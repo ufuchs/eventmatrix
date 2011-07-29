@@ -18,7 +18,7 @@ package de.z35.frugal.collections.exam.freedays;
  * MMXI-07-28 z35	if someday a validation against DD.MM.YYYY is necessary
  * 					please introduce a strategy pattern.
  */
-public class TimeFrameValidator {
+public class TimeFrameValidator implements ArgumentValidator {
 
 	public enum KindOfTimeFrame {
 		NOTHING,
@@ -82,6 +82,7 @@ public class TimeFrameValidator {
 	 * @param timeFrame
 	 * @return
 	 */
+	@Override
 	public int validate(String timeFrame) {
 
 		int argLen = timeFrame.length();
