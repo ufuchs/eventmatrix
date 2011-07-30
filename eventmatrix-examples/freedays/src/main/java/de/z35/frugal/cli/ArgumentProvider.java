@@ -79,7 +79,7 @@ public class ArgumentProvider<T> {
 		}
 
 		if (this.expander != null) {
-			this.apiArgument = this.expander.expand(argument, null);
+			this.apiArgument = this.expander.expand(argument, this.validator);
 		}
 
 	}

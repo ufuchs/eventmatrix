@@ -63,9 +63,9 @@ public class TimeFrame {
 	 * @param MM
 	 * @param DD
 	 */
-	public void setFromParams(int YY, int MM, int DD) {
+	public void setFromFields(int YY, int MM, int DD) {
 		this.fromYY = YY;
-		this.fromMM = MM;
+		this.fromMM = MM - 1;
 		this.fromDD = DD;
 	}
 
@@ -75,9 +75,9 @@ public class TimeFrame {
 	 * @param MM
 	 * @param DD
 	 */
-	public void setToParams(int YY, int MM, int DD) {
+	public void setToFields(int YY, int MM, int DD) {
 		this.fromYY = YY;
-		this.fromMM = MM;
+		this.fromMM = MM - 1;
 		this.fromDD = DD;
 	}
 

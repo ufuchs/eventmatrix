@@ -3,19 +3,17 @@
  * Released under the terms of the GNU GPL v2.0.
  */
 
-package de.z35.frugal.cli;
+package de.z35.frugal.cli.exam.freedays;
+
+import de.z35.frugal.cli.ArgumentProvider;
 
 /**
  * Created by IntelliJ IDEA.
  * User: ufuchs
  * Date: 30/07/11
- * Time: 20:32
+ * Time: 21:47
  * To change this template use File | Settings | File Templates.
  */
-public interface ArgumentExpanderRule<T> {
-
-	String getRuleName();
-
-	T expand(String argument);
+public class ArgumentProviderTimeFrame extends ArgumentProvider<TimeFrame> {
 
 }

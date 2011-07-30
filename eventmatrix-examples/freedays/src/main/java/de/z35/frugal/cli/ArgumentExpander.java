@@ -28,6 +28,6 @@ public interface ArgumentExpander<T> {
 	 * @param argument
 	 * @return
 	 */
-	<E extends Enum> T expand(String argument, E validatorResult);
+	T expand(String argument, ArgumentValidator validator);
 
 }
