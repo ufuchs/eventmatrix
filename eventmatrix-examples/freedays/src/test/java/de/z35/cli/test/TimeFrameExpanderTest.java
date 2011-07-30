@@ -23,9 +23,9 @@ public class TimeFrameExpanderTest {
 
 		TimeFrameExpander expander = new TimeFrameExpander();
 
-		TimeFrameValidator.KindOfTimeFrame kindOf = TimeFrameValidator.KindOfTimeFrame.YY;
+//		TimeFrameValidator.KindOfTimeFrame kindOf = TimeFrameValidator.KindOfTimeFrame.YY;
 
-		expander.expand("2011", kindOf);
+		expander.expand("2011", null);
 
 	}
 

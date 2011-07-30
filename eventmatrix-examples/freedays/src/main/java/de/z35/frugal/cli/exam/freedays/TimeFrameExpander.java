@@ -6,6 +6,7 @@
 package de.z35.frugal.cli.exam.freedays;
 
 import de.z35.frugal.cli.ArgumentExpander;
+import de.z35.frugal.cli.ArgumentValidator;
 
 /**
  * Created by IntelliJ IDEA.
@@ -18,7 +19,7 @@ public class TimeFrameExpander implements ArgumentExpander<TimeFrame> {
 
 
 	@Override
-	public <E extends Enum> TimeFrame expand(String argument, E validatorResult) {
+	public TimeFrame expand(String argument, ArgumentValidator validator) {
 		return null;  //To change body of implemented methods use File | Settings | File Templates.
 	}
 }
