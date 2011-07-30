@@ -9,8 +9,8 @@ import java.text.DateFormat;
 import java.util.Vector;
 
 import de.z35.frugal.cli.CliOptionService;
-import de.z35.frugal.cli.FreeDayCliOption;
-import de.z35.frugal.cli.TimeFrameValidator;
+import de.z35.frugal.cli.exam.freedays.FreeDayCliOption;
+import de.z35.frugal.cli.exam.freedays.TimeFrameValidator;
 
 public class FreeDays {
 

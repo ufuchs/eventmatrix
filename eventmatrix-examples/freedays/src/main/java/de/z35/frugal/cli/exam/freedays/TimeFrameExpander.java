@@ -3,7 +3,9 @@
  * Released under the terms of the GNU GPL v2.0.
  */
 
-package de.z35.frugal.cli;
+package de.z35.frugal.cli.exam.freedays;
+
+import de.z35.frugal.cli.ArgumentExpander;
 
 /**
  * Created by IntelliJ IDEA.

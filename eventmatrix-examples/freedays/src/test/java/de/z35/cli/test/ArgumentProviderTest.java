@@ -6,7 +6,7 @@
 package de.z35.cli.test;
 
 import de.z35.frugal.cli.ArgumentProvider;
-import de.z35.frugal.cli.TimeFrame;
+import de.z35.frugal.cli.exam.freedays.TimeFrame;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 

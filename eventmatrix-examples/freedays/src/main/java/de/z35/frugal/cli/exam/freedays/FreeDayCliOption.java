@@ -3,7 +3,9 @@
  * Released under the terms of the GNU GPL v2.0.
  */
 
-package de.z35.frugal.cli;
+package de.z35.frugal.cli.exam.freedays;
+
+import de.z35.frugal.cli.CliOption;
 
 /**
  * Created by IntelliJ IDEA.
@@ -12,7 +14,7 @@ package de.z35.frugal.cli;
  * Time: 20:24
  * To change this template use File | Settings | File Templates.
  */
-public class FreeDayCliOption extends CliOption<FreeDayCliOption.Options>{
+public class FreeDayCliOption extends CliOption<FreeDayCliOption.Options> {
 
 	/**
 	 * command line options

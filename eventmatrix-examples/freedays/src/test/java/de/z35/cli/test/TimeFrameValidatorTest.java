@@ -5,7 +5,7 @@
 
 package de.z35.cli.test;
 
-import de.z35.frugal.cli.TimeFrameValidator;
+import de.z35.frugal.cli.exam.freedays.TimeFrameValidator;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
