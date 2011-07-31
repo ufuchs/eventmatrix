@@ -6,14 +6,13 @@
 package de.z35.cli.test;
 
 import de.z35.frugal.cli.exam.freedays.*;
-import de.z35.frugal.collections.exam.freedays.HolidayProviderStrategyMovableDate;
+import de.z35.frugal.collections.exam.freedays.DateTimeUtils;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 
 /**
  * Created by IntelliJ IDEA.
@@ -31,11 +30,13 @@ public class TimeFrameExpanderTest {
 
 			{"2011", TimeFrameValidator.KindOfTimeFrame.YY},
 			{"07.2011", TimeFrameValidator.KindOfTimeFrame.YYMM},
-			{"01.2011-07.2011", TimeFrameValidator.KindOfTimeFrame.YYMM_YYMM}
+			{"01.2011-01.2012", TimeFrameValidator.KindOfTimeFrame.YYMM_YYMM}
 
 	};
 
 	private Field kindOf;
+
+	private TimeFrameExpander expander;
 
 	/**
 	 *
@@ -58,8 +59,9 @@ public class TimeFrameExpanderTest {
 
 		this.kindOf.setAccessible(true);
 
-	}
+		this.expander = TimeFrameExpander.createTimeFrameExpander();
 
+	}
 
 	/**
 	 *
@@ -67,21 +69,31 @@ public class TimeFrameExpanderTest {
 	 * @throws IllegalAccessException
 	 */
 	@Test(dataProvider = "timeFrameArgsProvider")
-	public void X_010_Test(String arg, TimeFrameValidator.KindOfTimeFrame kindOf) throws NoSuchFieldException, IllegalAccessException {
+	public void X_010_Test(String arg, TimeFrameValidator.KindOfTimeFrame kindOf) throws IllegalAccessException {
 
 		TimeFrameValidator validator = new TimeFrameValidator();
-
-		TimeFrameExpander expander = new TimeFrameExpander();
-
-		expander.setExpanderRule(new ExpanderRulePureYear());
-		expander.setExpanderRule(new ExpanderRulePeriodeOfMonths());
-		expander.setExpanderRule(new ExpanderRuleMonthOfYear());
 
 		this.kindOf.set(validator, kindOf);
 
 		TimeFrame tf = expander.expand(arg, validator);
 
-		Assert.assertNotNull(tf);
+		String from = DateTimeUtils.calToString(tf.getFrom());
+		String to = DateTimeUtils.calToString(tf.getTo());
+
+		switch (kindOf) {
+			case YY:
+				Assert.assertEquals(from, "2011-01-01");
+				Assert.assertEquals(to, "2011-12-31");
+				break;
+			case YYMM:
+				Assert.assertEquals(from, "2011-07-01");
+				Assert.assertEquals(to, "2011-07-31");
+				break;
+			case YYMM_YYMM:
+				Assert.assertEquals(from, "2011-01-01");
+				Assert.assertEquals(to, "2012-01-31");
+				break;
+		}
 
 	}
 

@@ -33,7 +33,7 @@ public class ExpanderRuleMonthOfYear implements ArgumentExpanderRule<TimeFrame> 
 	@Override
 	public TimeFrame expand(String argument) {
 
-		String[] parts = argument.split(".");
+		String[] parts = argument.split("\\.");
 
 		final int month = Integer.parseInt(parts[0]);
 

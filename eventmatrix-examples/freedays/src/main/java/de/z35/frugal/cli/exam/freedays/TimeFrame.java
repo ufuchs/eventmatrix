@@ -22,15 +22,7 @@ public class TimeFrame {
 
 	Calendar from;
 
-	int fromYY;
-	int fromMM;
-	int fromDD;
-
 	Calendar to;
-
-	int toYY;
-	int toMM;
-	int toDD;
 
 	// /////////////////////////////////////////////////////////////////////////
 	// ctor
@@ -45,10 +37,18 @@ public class TimeFrame {
 	// getters
 	// /////////////////////////////////////////////////////////////////////////
 
+	/**
+	 * Gets the start date of the time frame
+	 * @return
+	 */
 	public Calendar getFrom() {
-		return from;
+		return this.from;
 	}
 
+	/**
+	 * Gets the end date of the time frame
+	 * @return
+	 */
 	public Calendar getTo() {
 		return this.to;
 	}
@@ -59,26 +59,32 @@ public class TimeFrame {
 
 	/**
 	 *
-	 * @param YY
-	 * @param MM
-	 * @param DD
+	 * @param yy
+	 * @param mm
+	 * @param dd
 	 */
-	public void setFromFields(int YY, int MM, int DD) {
-		this.fromYY = YY;
-		this.fromMM = MM - 1;
-		this.fromDD = DD;
+	public void setFromFields(int yy, int mm, int dd) {
+		this.setFields(this.from, yy, mm, dd);
 	}
 
 	/**
 	 *
-	 * @param YY
-	 * @param MM
-	 * @param DD
+	 * @param yy
+	 * @param mm
+	 * @param dd
 	 */
-	public void setToFields(int YY, int MM, int DD) {
-		this.toYY = YY;
-		this.toMM = MM - 1;
-		this.toDD = DD;
+	public void setToFields(int yy, int mm, int dd) {
+		this.setFields(this.to, yy, mm, dd);
 	}
 
+	/**
+	 *
+	 * @param cal
+	 * @param yy
+	 * @param mm
+	 * @param dd
+	 */
+	private void setFields(Calendar cal, int yy, int mm, int dd) {
+		cal.set(yy, mm - 1, dd);
+	}
 }

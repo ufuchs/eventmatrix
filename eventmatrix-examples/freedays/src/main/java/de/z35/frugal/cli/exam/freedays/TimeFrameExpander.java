@@ -27,6 +27,25 @@ public class TimeFrameExpander implements ArgumentExpander<TimeFrame> {
 	private HashMap<TimeFrameValidator.KindOfTimeFrame, ArgumentExpanderRule<TimeFrame>> hm =
 			new HashMap<TimeFrameValidator.KindOfTimeFrame, ArgumentExpanderRule<TimeFrame>>();
 
+	private TimeFrameExpander() {
+	}
+
+	/**
+	 *
+	 * @return
+	 */
+	public static TimeFrameExpander createTimeFrameExpander() {
+
+		TimeFrameExpander expander = new TimeFrameExpander();
+
+		expander.setExpanderRule(new ExpanderRulePureYear());
+		expander.setExpanderRule(new ExpanderRulePeriodOfMonths());
+		expander.setExpanderRule(new ExpanderRuleMonthOfYear());
+
+		return expander;
+
+	}
+
 	// /////////////////////////////////////////////////////////////////////////
 	// setters
 	// /////////////////////////////////////////////////////////////////////////

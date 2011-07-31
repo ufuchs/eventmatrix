@@ -16,7 +16,7 @@ import java.util.Calendar;
  * Time: 21:13
  * To change this template use File | Settings | File Templates.
  */
-public class ExpanderRulePeriodeOfMonths implements ArgumentExpanderRule<TimeFrame> {
+public class ExpanderRulePeriodOfMonths implements ArgumentExpanderRule<TimeFrame> {
 
 	/**
 	 * In this case <code>getRuleName</code> provides the name of the
