@@ -6,7 +6,10 @@
 package de.z35.frugal.cli.exam.freedays;
 
 import de.z35.frugal.cli.ArgumentExpander;
+import de.z35.frugal.cli.ArgumentExpanderRule;
 import de.z35.frugal.cli.ArgumentValidator;
+
+import java.util.HashMap;
 
 /**
  * Created by IntelliJ IDEA.
@@ -17,9 +20,55 @@ import de.z35.frugal.cli.ArgumentValidator;
  */
 public class TimeFrameExpander implements ArgumentExpander<TimeFrame> {
 
+	// /////////////////////////////////////////////////////////////////////////
+	// fields
+	// /////////////////////////////////////////////////////////////////////////
 
+	private HashMap<TimeFrameValidator.KindOfTimeFrame, ArgumentExpanderRule<TimeFrame>> hm =
+			new HashMap<TimeFrameValidator.KindOfTimeFrame, ArgumentExpanderRule<TimeFrame>>();
+
+	// /////////////////////////////////////////////////////////////////////////
+	// setters
+	// /////////////////////////////////////////////////////////////////////////
+
+	/**
+	 *
+	 * @param rule
+	 */
+	public void setExpanderRule(ArgumentExpanderRule<TimeFrame> rule) {
+
+		TimeFrameValidator.KindOfTimeFrame kindOf =
+				Enum.valueOf(TimeFrameValidator.KindOfTimeFrame.class, rule.getRuleName());
+
+		hm.put(kindOf, rule);
+
+	}
+
+	// /////////////////////////////////////////////////////////////////////////
+	// production
+	// /////////////////////////////////////////////////////////////////////////
+
+	/**
+	 * Expands an argument like
+	 *   2011
+	 *   07.2011
+	 *   01.2011-07.2011
+	 * into an API-usable time frame.
+	 *
+	 * @param argument
+	 * @param validator
+	 * @return
+	 */
 	@Override
 	public TimeFrame expand(String argument, ArgumentValidator validator) {
-		return null;  //To change body of implemented methods use File | Settings | File Templates.
+
+		TimeFrameValidator timeFrameValidator = (TimeFrameValidator) validator;
+
+		ArgumentExpanderRule<TimeFrame> rule =
+				hm.get(timeFrameValidator.getKindOfTimeFrame());
+
+		return rule.expand(argument);
+
 	}
+
 }

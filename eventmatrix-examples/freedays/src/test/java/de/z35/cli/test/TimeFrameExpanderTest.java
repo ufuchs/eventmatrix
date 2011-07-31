@@ -5,9 +5,15 @@
 
 package de.z35.cli.test;
 
-import de.z35.frugal.cli.exam.freedays.TimeFrameExpander;
-import de.z35.frugal.cli.exam.freedays.TimeFrameValidator;
+import de.z35.frugal.cli.exam.freedays.*;
+import de.z35.frugal.collections.exam.freedays.HolidayProviderStrategyMovableDate;
+import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 
 /**
  * Created by IntelliJ IDEA.
@@ -18,14 +24,64 @@ import org.testng.annotations.Test;
  */
 public class TimeFrameExpanderTest {
 
-	@Test
-	public void X_010_Test() {
+	/**
+	 *
+	 */
+	private Object[][] TIMEFRAME_ARGS = new Object[][] {
+
+			{"2011", TimeFrameValidator.KindOfTimeFrame.YY},
+			{"07.2011", TimeFrameValidator.KindOfTimeFrame.YYMM},
+			{"01.2011-07.2011", TimeFrameValidator.KindOfTimeFrame.YYMM_YYMM}
+
+	};
+
+	private Field kindOf;
+
+	/**
+	 *
+	 * @return
+	 */
+	@DataProvider(name = "timeFrameArgsProvider")
+	public Object[][] getTimeFrameArgs() {
+		return TIMEFRAME_ARGS;
+	}
+
+	/**
+	 *
+	 * @throws NoSuchFieldException
+	 */
+	@BeforeClass
+	public void init() throws NoSuchFieldException {
+
+		this.kindOf =
+			TimeFrameValidator.class.getDeclaredField("kindOfTimeFrame");
+
+		this.kindOf.setAccessible(true);
+
+	}
+
+
+	/**
+	 *
+	 * @throws NoSuchFieldException
+	 * @throws IllegalAccessException
+	 */
+	@Test(dataProvider = "timeFrameArgsProvider")
+	public void X_010_Test(String arg, TimeFrameValidator.KindOfTimeFrame kindOf) throws NoSuchFieldException, IllegalAccessException {
+
+		TimeFrameValidator validator = new TimeFrameValidator();
 
 		TimeFrameExpander expander = new TimeFrameExpander();
 
-//		TimeFrameValidator.KindOfTimeFrame kindOf = TimeFrameValidator.KindOfTimeFrame.YY;
+		expander.setExpanderRule(new ExpanderRulePureYear());
+		expander.setExpanderRule(new ExpanderRulePeriodeOfMonths());
+		expander.setExpanderRule(new ExpanderRuleMonthOfYear());
 
-		expander.expand("2011", null);
+		this.kindOf.set(validator, kindOf);
+
+		TimeFrame tf = expander.expand(arg, validator);
+
+		Assert.assertNotNull(tf);
 
 	}
 

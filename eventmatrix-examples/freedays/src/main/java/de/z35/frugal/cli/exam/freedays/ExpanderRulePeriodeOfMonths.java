@@ -18,9 +18,14 @@ import java.util.Calendar;
  */
 public class ExpanderRulePeriodeOfMonths implements ArgumentExpanderRule<TimeFrame> {
 
+	/**
+	 * In this case <code>getRuleName</code> provides the name of the
+	 * corresponding enum field.
+	 * @return
+	 */
 	@Override
 	public String getRuleName() {
-		return "timeframe-periodeOfmonths";
+		return TimeFrameValidator.KindOfTimeFrame.YYMM_YYMM.name();
 	}
 
 	/**
@@ -52,7 +57,7 @@ public class ExpanderRulePeriodeOfMonths implements ArgumentExpanderRule<TimeFra
 	 */
 	private void extractToDate(String date, TimeFrame tf) {
 
-		String[] to = date.split(".");
+		String[] to = date.split("\\.");
 
 		int month = Integer.parseInt(to[0]);
 
@@ -68,7 +73,7 @@ public class ExpanderRulePeriodeOfMonths implements ArgumentExpanderRule<TimeFra
 	 */
 	private void extractFromDate(String date, TimeFrame tf) {
 
-		String[] from = date.split(".");
+		String[] from = date.split("\\.");
 
 		int month = Integer.parseInt(from[0]);
 

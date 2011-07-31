@@ -20,7 +20,7 @@ public class ExpanderRuleMonthOfYear implements ArgumentExpanderRule<TimeFrame> 
 
 	@Override
 	public String getRuleName() {
-		return "timeframe-monthOfYear";
+		return TimeFrameValidator.KindOfTimeFrame.YYMM.name();
 	}
 
 	/**

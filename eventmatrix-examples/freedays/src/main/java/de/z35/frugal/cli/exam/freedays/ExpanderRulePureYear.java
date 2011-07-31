@@ -18,7 +18,7 @@ public class ExpanderRulePureYear implements ArgumentExpanderRule<TimeFrame> {
 
 	@Override
 	public String getRuleName() {
-		return "timeframe-year";
+		return TimeFrameValidator.KindOfTimeFrame.YY.name();
 	}
 
 	/**

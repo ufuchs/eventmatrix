@@ -76,9 +76,9 @@ public class TimeFrame {
 	 * @param DD
 	 */
 	public void setToFields(int YY, int MM, int DD) {
-		this.fromYY = YY;
-		this.fromMM = MM - 1;
-		this.fromDD = DD;
+		this.toYY = YY;
+		this.toMM = MM - 1;
+		this.toDD = DD;
 	}
 
 }
