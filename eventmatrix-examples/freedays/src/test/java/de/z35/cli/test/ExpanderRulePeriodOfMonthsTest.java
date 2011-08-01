@@ -5,8 +5,8 @@
 
 package de.z35.cli.test;
 
-import de.z35.frugal.cli.exam.freedays.ExpanderRulePeriodOfMonths;
 import de.z35.frugal.cli.exam.freedays.TimeFrame;
+import de.z35.frugal.cli.exam.freedays.TimeFrameExpander;
 import de.z35.frugal.collections.exam.freedays.DateTimeUtils;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
@@ -47,7 +47,8 @@ public class ExpanderRulePeriodOfMonthsTest {
 	@Test
 	public void X_010_Test() {
 
-		ExpanderRulePeriodOfMonths expander = new ExpanderRulePeriodOfMonths();
+		TimeFrameExpander.ExpanderRulePeriodOfMonths expander =
+				new TimeFrameExpander.ExpanderRulePeriodOfMonths();
 		Assert.assertNotNull(expander);
 
 	}
@@ -58,7 +59,8 @@ public class ExpanderRulePeriodOfMonthsTest {
 	@Test(dataProvider = "timeFramePeriodsProvider")
 	public void X_020_Test(String arg, String expected) {
 
-		ExpanderRulePeriodOfMonths expander = new ExpanderRulePeriodOfMonths();
+		TimeFrameExpander.ExpanderRulePeriodOfMonths expander =
+				new TimeFrameExpander.ExpanderRulePeriodOfMonths();
 
 		TimeFrame tf = expander.expand(arg);
 
