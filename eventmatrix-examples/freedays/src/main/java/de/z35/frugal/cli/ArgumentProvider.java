@@ -39,6 +39,10 @@ public class ArgumentProvider<T> {
 	// setters
 	// /////////////////////////////////////////////////////////////////////////
 
+	public T getApiArgument() {
+		return apiArgument;
+	}
+
 	/**
 	 *
 	 * @param validator
@@ -60,8 +64,9 @@ public class ArgumentProvider<T> {
 	// /////////////////////////////////////////////////////////////////////////
 
 	/**
+	 * Provides an API compatible argument.
 	 *
-	 * @param argument
+	 * @param argument Raw argument from the commandline
 	 * @throws IllegalArgumentException
 	 */
 	public void process(String argument) throws IllegalArgumentException {

@@ -24,12 +24,20 @@ public class TimeFrameArgumentProvider extends ArgumentProvider<TimeFrame> {
 	// ctor
 	// /////////////////////////////////////////////////////////////////////////
 
-	public TimeFrameArgumentProvider() {}
+	private TimeFrameArgumentProvider() {}
 
+	/**
+	 *
+	 * @return
+	 */
+	public static TimeFrameArgumentProvider createTimeFrameArgumentProvider() {
 
-	// /////////////////////////////////////////////////////////////////////////
-	// production
-	// /////////////////////////////////////////////////////////////////////////
+		TimeFrameArgumentProvider prov = new TimeFrameArgumentProvider();
 
+		prov.setValidator(new TimeFrameValidator());
+		prov.setExpander(TimeFrameExpander.createTimeFrameExpander());
+
+		return prov;
+	}
 
 }

@@ -10,6 +10,8 @@ import java.util.Vector;
 
 import de.z35.frugal.cli.CliOptionService;
 import de.z35.frugal.cli.exam.freedays.FreeDayCliOption;
+import de.z35.frugal.cli.exam.freedays.TimeFrame;
+import de.z35.frugal.cli.exam.freedays.TimeFrameArgumentProvider;
 import de.z35.frugal.cli.exam.freedays.TimeFrameValidator;
 
 public class FreeDays {
@@ -29,11 +31,12 @@ public class FreeDays {
 
 		// /////////////////////////////////////////////////////////////////////
 
-		String yearOption = "2.2010-10.2011";
+		TimeFrameArgumentProvider timeFrameProv
+			= TimeFrameArgumentProvider.createTimeFrameArgumentProvider();
 
-		TimeFrameValidator oyv = new TimeFrameValidator();
+		timeFrameProv.process("07.2011");
 
-		oyv.validate(yearOption);
+		TimeFrame tf = timeFrameProv.getApiArgument();
 
 		// /////////////////////////////////////////////////////////////////////
 
@@ -78,20 +81,6 @@ public class FreeDays {
 
 	}
 
-	/**
-	 *
-	 * @param date
-	 * @see  http://www.regular-expressions.info/regexbuddy/dateyyyymmdd.html
-	 * @see  http://www.regexplanet.com/simple/
-	 */
-	private static void splitDate(String date) {
-
-
-		String regex = "^(0[1-9]|1[012])[. /.](19|20)\\d\\d[- /.](0[1-9]|1[012])[. /.](19|20)\\d\\d$";
-		// ^(19|20)\d\d$  ==>2011
-		// ^(0[1-9]|1[012])[. /.](19|20)\d\d$ ==>10.2011
-
-	}
 
 	private static Vector<Holiday> getHolidays(int year) {
 
